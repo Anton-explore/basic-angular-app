@@ -4,14 +4,11 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { MainSectionComponent } from './main-section/main-section.component';
-import { CoursesListComponent } from './courses-list/courses-list.component';
-import { LogoComponent } from './logo/logo.component';
-import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
-import { SearchBarComponent } from './search-bar/search-bar.component';
-import { CourseCardComponent } from './course-card/course-card.component';
+import { HeaderComponent } from './core/header/header.component';
+import { FooterComponent } from './core/footer/footer.component';
+import { FeatureModule } from './feature/feature.module';
+import { MainSectionComponent } from './core/main-section/main-section.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -19,13 +16,14 @@ import { CourseCardComponent } from './course-card/course-card.component';
     HeaderComponent,
     FooterComponent,
     MainSectionComponent,
-    CoursesListComponent,
-    LogoComponent,
-    BreadcrumbsComponent,
-    SearchBarComponent,
-    CourseCardComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  imports: [
+    BrowserModule,
+    SharedModule,
+    FeatureModule,
+    AppRoutingModule,
+    FormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
