@@ -8,15 +8,18 @@ import { BUTTONS_TEXT } from 'src/app/utils/mock-items';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
-  buttonText = BUTTONS_TEXT.IN;
-  user = 'User login';
+  buttonText: string = BUTTONS_TEXT.IN;
+  isLoggedIn: boolean = false;
+  user: string = 'User login';
 
   onLogging(): void {
     if (this.buttonText === BUTTONS_TEXT.IN) {
       this.buttonText = BUTTONS_TEXT.OUT;
+      this.isLoggedIn = !this.isLoggedIn;
       console.log('Logging in..');
     } else {
       this.buttonText = BUTTONS_TEXT.IN;
+      this.isLoggedIn = !this.isLoggedIn;
       console.log('Logging off..');
     }
   }
