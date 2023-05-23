@@ -1,5 +1,15 @@
 # basic-angular-app
 
+## Homework 2
+
+### Evaluation criteria
+
+1. Added some simple markup + css without splitting into components. Unable to run app.
+2. Partially done with critical issues.
+3. Added implementations for all components, with some major issues.
+4. Did all above without major issues.
+
+
 ## Homework 1
 
 ### Evaluation criteria
