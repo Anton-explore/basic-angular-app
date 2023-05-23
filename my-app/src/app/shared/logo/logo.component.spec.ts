@@ -9,6 +9,8 @@ describe('LogoComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [LogoComponent],
+      errorOnUnknownProperties: true,
+      errorOnUnknownElements: true,
     }).compileComponents();
 
     fixture = TestBed.createComponent(LogoComponent);

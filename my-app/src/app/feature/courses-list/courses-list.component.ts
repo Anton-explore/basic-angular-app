@@ -24,10 +24,10 @@ export class CoursesListComponent implements OnInit {
   }
 
   onCourseEdited(courseId: number): void {
-    console.log('You want edit course with ID:', courseId);
+    console.log('You want edit course with ID: ' + courseId);
   }
 
   onCourseDeleted(courseId: number): void {
-    console.log('You delete course with ID:', courseId);
+    console.log('You delete course with ID: ' + courseId);
   }
 }

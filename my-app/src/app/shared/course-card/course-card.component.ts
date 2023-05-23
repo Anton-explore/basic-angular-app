@@ -26,8 +26,10 @@ export class CourseCardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.formattedDuration = formatDuration(this.course.length);
-    this.convertedDate = convertToLocalDate(this.course.date);
+    if (this.course) {
+      this.formattedDuration = formatDuration(this.course.length);
+      this.convertedDate = convertToLocalDate(this.course.date);
+    }
     console.log('ngOnInit was called!');
   }
 
