@@ -1,12 +1,19 @@
 export interface CourseType {
-  id: string;
-  title: string;
-  creationDate: string;
-  duration: number;
+  id: number;
+  name: string;
+  date: string;
+  length: number;
   description: string;
+  authors?: AuthorType[];
+  isTopRated?: boolean;
 }
-export type User = {
+export interface User {
   id: string;
   firstName: string;
   lastName: string;
-};
+}
+
+export interface AuthorType {
+  id: number;
+  name: string;
+}

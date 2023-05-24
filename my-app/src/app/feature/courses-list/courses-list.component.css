@@ -1,5 +1,5 @@
 .app-courses-page {
-  height: 100%;
+  height: fit-content;
   background-color: #f5f6fa;
   padding: 10px 50px;
 }
@@ -7,44 +7,31 @@
 .app-courses-list {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 24px;
   align-items: stretch;
   padding: 0;
+  margin: 0;
 }
 
-.app-courses-card {
+.app-load-more-wrapper {
+  width: 100%;
+  margin: 24px 0;
+  padding: 24px;
   display: flex;
-  /* justify-content: stretch; */
+  justify-content: center;
+  border-radius: 5px;
   background-color: #ffff;
-  padding: 10px;
   box-shadow: 0 1px 2px 0 rgba(29, 30, 38, 0.1),
     0 2px 10px 0 rgba(29, 30, 38, 0.15);
 }
-
-.app-course-card__right-part {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.app-course-card__style-wrapper {
-  display: flex;
-  gap: 10px;
-  justify-content: stretch;
-}
-
-.app-course-card__info {
-  font-size: 10px;
-  color: #858997;
-}
-
-.app-button {
-  background: #009ecc;
-  color: #fff;
+.app-button__load-more {
+  background-color: transparent;
   border: none;
-  border-radius: 3px;
-  font-size: 12px;
-  line-height: 12px;
-  height: 24px;
-  width: 71px;
+}
+
+@media (max-width: 1000px) {
+  .app-courses-page {
+    height: fit-content;
+    padding-bottom: 40px;
+  }
 }

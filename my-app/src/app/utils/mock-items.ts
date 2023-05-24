@@ -2,18 +2,32 @@ import { CourseType } from './datatypes';
 
 export const COURSES: CourseType[] = [
   {
-    id: 'de5aaa59-90f5-4dbc-b8a9-aaf205c551ba',
-    title: 'JavaScript',
+    id: 455654757,
+    name: 'JavaScript',
     description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.`,
-    creationDate: '8/3/2021',
-    duration: 160,
+    date: '8/3/2021',
+    length: 160,
   },
   {
-    id: 'b5630fdd-7bf7-4d39-b75a-2b5906fd0916',
-    title: 'Angular',
+    id: 397520916,
+    name: 'Angular',
     description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.`,
-    creationDate: '10/11/2020',
-    duration: 210,
+    date: '10/11/2020',
+    length: 210,
+  },
+  {
+    id: 208274396,
+    name: 'TypeScript',
+    description: `JavaScript is a powerful programming language. But as it continues to evolve, outdated code gets messy and difficult to maintain. That's where TypeScript comes in. It builds on your JavaScript foundation so you can develop higher-quality, less error-prone code faster. As a TypeScript developer, you'll be in higher demand and gain a competitive edge in the work world.`,
+    date: '7/4/2022',
+    length: 410,
+  },
+  {
+    id: 594397589,
+    name: 'Node.js',
+    description: `In this course, you will learn the background of Node.js and concepts and strategies for writing asynchronous code using callbacks and streams. It also explains how to modularize your application with NPM and require(). Finally, you will learn built-in APIs for building and scale web applications as well as a few key third-party modules.`,
+    date: '8/7/2023',
+    length: 610,
   },
 ];
 
@@ -31,6 +45,7 @@ export const BUTTONS_TEXT = {
   ADD: 'Add course',
   EDIT: 'Edit',
   DEL: 'Delete',
+  MORE: 'Load more',
   OUT: 'Log out',
   IN: 'Login',
   REG: 'Registration',

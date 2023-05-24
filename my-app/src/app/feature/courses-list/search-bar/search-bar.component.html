@@ -1,9 +1,11 @@
 <section class="app-search-bar">
   <form class="app-search-bar-form" action="">
-    <input type="text" placeholder="Text to search" />
-    <button class="app-button__search">{{ searchText }}</button>
+    <input type="text" #searchInput [placeholder]="placeholder" />
+    <button class="app-button__search" (click)="onSearch(searchInput)">
+      {{ searchText }}
+    </button>
   </form>
-  <button class="app-button__add-course">
+  <button class="app-button__add-course" (click)="onAddingCourse()">
     <svg
       width="24"
       height="24"
