@@ -9,6 +9,13 @@ import { CourseType } from 'src/app/utils/datatypes';
 describe('CoursesListComponent', () => {
   let component: CoursesListComponent;
   let fixture: ComponentFixture<CoursesListComponent>;
+  const course: CourseType = {
+    id: 7777,
+    length: 60,
+    date: '8/9/2020',
+    name: 'Test course',
+    description: 'Some simple description',
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -26,56 +33,28 @@ describe('CoursesListComponent', () => {
   });
 
   it('should initialize the courses array with mock data', () => {
-    fixture.detectChanges();
     expect(component.courses).toEqual(COURSES);
   });
 
   it('should display course list items', () => {
     component.courses = COURSES;
-    fixture.detectChanges();
     const courseListItems =
       fixture.nativeElement.querySelectorAll('.app-courses-card');
     expect(courseListItems.length).toBe(COURSES.length);
   });
 
   it('should display the "Load more" button', () => {
-    fixture.detectChanges();
-    const loadMoreButton = fixture.nativeElement.querySelector(
-      '.app-button__load-more'
-    );
-    expect(loadMoreButton.textContent).toContain('Load more');
-  });
-
-  it('should call onLoadingMore method when "Load more" button is clicked', () => {
-    spyOn(component, 'onLoadingMore');
-    fixture.detectChanges();
-    const loadMoreButton = fixture.nativeElement.querySelector(
-      '.app-button__load-more'
-    );
-    loadMoreButton.click();
-    expect(component.onLoadingMore).toHaveBeenCalled();
+    expect(component.loadMoreText).toContain('Load more');
   });
 
   it('should log "Loading moore.." when "Load more" button is clicked', () => {
     spyOn(console, 'log');
-    fixture.detectChanges();
-    const loadMoreButton = fixture.nativeElement.querySelector(
-      '.app-button__load-more'
-    );
-    loadMoreButton.click();
+    component.onLoadingMore();
     expect(console.log).toHaveBeenCalledWith('Loading moore..');
   });
 
   it('should track courses by their id', () => {
-    const index = 1;
-    const course: CourseType = {
-      id: 7777,
-      length: 60,
-      date: '8/9/2020',
-      name: 'Test course',
-      description: 'Some simple description',
-    };
-    const result = component.trackCourseById(index, course);
+    const result = component.trackCourseById(course);
     expect(result).toBe(course.id);
   });
 

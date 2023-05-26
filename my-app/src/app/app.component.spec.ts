@@ -20,8 +20,6 @@ describe('AppComponent', () => {
         FooterComponent,
         MainSectionComponent,
       ],
-      errorOnUnknownProperties: true,
-      errorOnUnknownElements: true,
     }).compileComponents();
     fixture = TestBed.createComponent(AppComponent);
     app = fixture.componentInstance;

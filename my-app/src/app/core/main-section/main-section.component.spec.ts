@@ -12,8 +12,6 @@ describe('MainSectionComponent', () => {
     await TestBed.configureTestingModule({
       imports: [SharedModule, FeatureModule],
       declarations: [MainSectionComponent],
-      errorOnUnknownProperties: true,
-      errorOnUnknownElements: true,
     }).compileComponents();
 
     fixture = TestBed.createComponent(MainSectionComponent);

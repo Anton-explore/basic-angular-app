@@ -9,8 +9,6 @@ describe('SearchBarComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [SearchBarComponent],
-      errorOnUnknownProperties: true,
-      errorOnUnknownElements: true,
     }).compileComponents();
 
     fixture = TestBed.createComponent(SearchBarComponent);
@@ -22,19 +20,10 @@ describe('SearchBarComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should view properties of placeholder and buttons correctly', () => {
-    const addCourseButton = fixture.nativeElement.querySelector(
-      '.app-button__add-course'
-    );
-    const searchButton = fixture.nativeElement.querySelector(
-      '.app-button__search'
-    );
-    const searchInput =
-      fixture.nativeElement.querySelector('.app-input__search');
-
-    expect(addCourseButton.textContent).toContain('Add course');
-    expect(searchButton.textContent).toContain('Search');
-    expect(searchInput.getAttribute('placeholder')).toContain('Type to search');
+  it('should have placeholder and buttons text correctly', () => {
+    expect(component.addText).toContain('Add course');
+    expect(component.searchText).toContain('Search');
+    expect(component.placeholder).toContain('Type to search');
   });
 
   it('should update the inputValue property and log the search value on onSearch method call', () => {

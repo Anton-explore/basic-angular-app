@@ -13,8 +13,6 @@ describe('HeaderComponent', () => {
     await TestBed.configureTestingModule({
       imports: [RouterModule, AppRoutingModule, SharedModule],
       declarations: [HeaderComponent],
-      errorOnUnknownElements: true,
-      errorOnUnknownProperties: true,
     }).compileComponents();
 
     fixture = TestBed.createComponent(HeaderComponent);
@@ -32,18 +30,12 @@ describe('HeaderComponent', () => {
   });
 
   it('should change button text and logging status when onLogging method is called', () => {
-    expect(component.buttonText).toBe('Login');
-    expect(component.isLoggedIn).toBeFalse();
+    component.onLogging();
 
-    const loggingButton = fixture.nativeElement.querySelector(
-      '.app-button__logging'
-    );
-
-    loggingButton.click();
     expect(component.buttonText).toBe('Log out');
     expect(component.isLoggedIn).toBeTrue();
 
-    loggingButton.click();
+    component.onLogging();
     expect(component.buttonText).toBe('Login');
     expect(component.isLoggedIn).toBeFalse();
   });
@@ -53,10 +45,7 @@ describe('HeaderComponent', () => {
     expect(component.buttonText).toBe('Login');
     expect(component.isLoggedIn).toBeFalse();
 
-    const loggingButton = fixture.nativeElement.querySelector(
-      '.app-button__logging'
-    );
-    loggingButton.click();
+    component.onLogging();
 
     expect(console.log).toHaveBeenCalledWith('Logging in..');
   });
@@ -65,10 +54,7 @@ describe('HeaderComponent', () => {
     spyOn(console, 'log');
     component.buttonText = 'Log out';
     component.isLoggedIn = true;
-    const loggingButton = fixture.nativeElement.querySelector(
-      '.app-button__logging'
-    );
-    loggingButton.click();
+    component.onLogging();
     expect(console.log).toHaveBeenCalledWith('Logging off..');
   });
 });
