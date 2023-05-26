@@ -19,15 +19,15 @@ export class CoursesListComponent implements OnInit {
     console.log('Loading moore..');
   }
 
-  trackCourseById(index: number, course: CourseType) {
+  trackCourseById(course: CourseType) {
     return course.id;
   }
 
   onCourseEdited(courseId: number): void {
-    console.log('You want edit course with ID:', courseId);
+    console.log('You want edit course with ID: ' + courseId);
   }
 
   onCourseDeleted(courseId: number): void {
-    console.log('You delete course with ID:', courseId);
+    console.log('You delete course with ID: ' + courseId);
   }
 }

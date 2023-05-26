@@ -9,8 +9,8 @@ import { BUTTONS_TEXT } from 'src/app/utils/mock-items';
 })
 export class HeaderComponent {
   buttonText: string = BUTTONS_TEXT.IN;
-  isLoggedIn: boolean = false;
-  user: string = 'User login';
+  isLoggedIn = false;
+  user = 'User login';
 
   onLogging(): void {
     if (this.buttonText === BUTTONS_TEXT.IN) {

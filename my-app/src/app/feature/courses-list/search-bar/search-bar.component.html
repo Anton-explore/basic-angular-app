@@ -1,6 +1,10 @@
 <section class="app-search-bar">
   <form class="app-search-bar-form" action="">
-    <input type="text" #searchInput [placeholder]="placeholder" />
+    <input
+      class="app-input__search"
+      type="text"
+      #searchInput
+      [placeholder]="placeholder" />
     <button class="app-button__search" (click)="onSearch(searchInput)">
       {{ searchText }}
     </button>
