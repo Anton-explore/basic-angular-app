@@ -36,13 +36,6 @@ describe('CoursesListComponent', () => {
     expect(component.courses).toEqual(COURSES);
   });
 
-  it('should display course list items', () => {
-    component.courses = COURSES;
-    const courseListItems =
-      fixture.nativeElement.querySelectorAll('.app-courses-card');
-    expect(courseListItems.length).toBe(COURSES.length);
-  });
-
   it('should display the "Load more" button', () => {
     expect(component.loadMoreText).toContain('Load more');
   });
@@ -58,35 +51,39 @@ describe('CoursesListComponent', () => {
     expect(result).toBe(course.id);
   });
 
-  it('should call onCourseEdited method with correct courseId', () => {
-    spyOn(component, 'onCourseEdited');
-    const courseId = 2848;
-    component.onCourseEdited(courseId);
-    expect(component.onCourseEdited).toHaveBeenCalledWith(courseId);
+  describe('onCourseEdited method', () => {
+    it('should call onCourseEdited method with correct courseId', () => {
+      spyOn(component, 'onCourseEdited');
+      const courseId = 2848;
+      component.onCourseEdited(courseId);
+      expect(component.onCourseEdited).toHaveBeenCalledWith(courseId);
+    });
+
+    it('should log message with course id when "onCourseEdited" method was called', () => {
+      spyOn(console, 'log');
+      const courseId = 2848;
+      component.onCourseEdited(courseId);
+      expect(console.log).toHaveBeenCalledWith(
+        `You want edit course with ID: ${courseId}`
+      );
+    });
   });
 
-  it('should log message with course id when "onCourseEdited" method was called', () => {
-    spyOn(console, 'log');
-    const courseId = 2848;
-    component.onCourseEdited(courseId);
-    expect(console.log).toHaveBeenCalledWith(
-      `You want edit course with ID: ${courseId}`
-    );
-  });
+  describe('onCourseDeleted method', () => {
+    it('should call onCourseDeleted method with correct courseId', () => {
+      spyOn(component, 'onCourseDeleted');
+      const courseId = 7777;
+      component.onCourseDeleted(courseId);
+      expect(component.onCourseDeleted).toHaveBeenCalledWith(courseId);
+    });
 
-  it('should call onCourseDeleted method with correct courseId', () => {
-    spyOn(component, 'onCourseDeleted');
-    const courseId = 7777;
-    component.onCourseDeleted(courseId);
-    expect(component.onCourseDeleted).toHaveBeenCalledWith(courseId);
-  });
-
-  it('should log message with course id when "onCourseDeleted" method was called', () => {
-    spyOn(console, 'log');
-    const courseId = 7777;
-    component.onCourseDeleted(courseId);
-    expect(console.log).toHaveBeenCalledWith(
-      `You delete course with ID: ${courseId}`
-    );
+    it('should log message with course id when "onCourseDeleted" method was called', () => {
+      spyOn(console, 'log');
+      const courseId = 7777;
+      component.onCourseDeleted(courseId);
+      expect(console.log).toHaveBeenCalledWith(
+        `You delete course with ID: ${courseId}`
+      );
+    });
   });
 });

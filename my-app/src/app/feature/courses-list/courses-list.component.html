@@ -1,12 +1,19 @@
 <section class="app-courses-page">
   <app-search-bar></app-search-bar>
-  <ul class="app-courses-list">
-    <app-course-card
-      *ngFor="let course of courses; trackBy: trackCourseById"
-      [course]="course"
-      (courseEdited)="onCourseEdited($event)"
-      (courseDeleted)="onCourseDeleted($event)"></app-course-card>
-  </ul>
+  <ng-container *ngIf="courses.length; else emptyList">
+    <ul class="app-courses-list">
+      <app-course-card
+        *ngFor="let course of courses; trackBy: trackCourseById"
+        [course]="course"
+        (courseEdited)="onCourseEdited($event)"
+        (courseDeleted)="onCourseDeleted($event)"></app-course-card>
+    </ul>
+  </ng-container>
+  <ng-template #emptyList>
+    <div class="app-load-more-wrapper">
+      <p>No data. Feel free to add new course</p>
+    </div>
+  </ng-template>
   <div class="app-load-more-wrapper">
     <button class="app-button__load-more" (click)="onLoadingMore()">
       <a href="#">

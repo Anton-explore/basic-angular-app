@@ -19,7 +19,7 @@ export class CoursesListComponent implements OnInit {
     console.log('Loading moore..');
   }
 
-  trackCourseById(course: CourseType) {
+  trackCourseById(index: number, course: CourseType): number {
     return course.id;
   }
 

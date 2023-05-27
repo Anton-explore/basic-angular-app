@@ -5,7 +5,7 @@ export const COURSES: CourseType[] = [
     id: 455654757,
     name: 'JavaScript',
     description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.`,
-    date: '8/3/2021',
+    date: '5/20/2023',
     length: 160,
   },
   {
@@ -21,6 +21,7 @@ export const COURSES: CourseType[] = [
     description: `JavaScript is a powerful programming language. But as it continues to evolve, outdated code gets messy and difficult to maintain. That's where TypeScript comes in. It builds on your JavaScript foundation so you can develop higher-quality, less error-prone code faster. As a TypeScript developer, you'll be in higher demand and gain a competitive edge in the work world.`,
     date: '7/4/2022',
     length: 410,
+    isTopRated: true,
   },
   {
     id: 594397589,
