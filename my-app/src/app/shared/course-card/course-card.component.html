@@ -1,9 +1,10 @@
 <li
   class="app-courses-card"
   [ngClass]="{ 'app-course-card__top-rated': course.isTopRated }"
-  [appHighlightBorder]="course.date">
+  [appHighlightBorder]="course.date"
+  [appTopRated]="course.isTopRated">
   <div>
-    <h2>{{ course.name }}</h2>
+    <h2 class="app-course-card__title">{{ course.name | uppercase }}</h2>
     <p>{{ course.description }}</p>
   </div>
   <div class="app-course-card__right-part">
@@ -19,7 +20,7 @@
             d="M12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12.5 7H11V13L16.2 16.2L17 14.9L12.5 12.2V7Z"
             fill="#858997" />
         </svg>
-        {{ formattedDuration }}
+        {{ course.length | duration }}
       </div>
       <div class="app-course-card__info">
         <svg
@@ -32,7 +33,7 @@
             d="M19 4H18V2H16V4H8V2H6V4H5C3.89 4 3.01 4.9 3.01 6L3 20C3 21.1 3.89 22 5 22H19C20.1 22 21 21.1 21 20V6C21 4.9 20.1 4 19 4ZM19 20H5V10H19V20ZM19 8H5V6H19V8ZM9 14H7V12H9V14ZM13 14H11V12H13V14ZM17 14H15V12H17V14ZM9 18H7V16H9V18ZM13 18H11V16H13V18ZM17 18H15V16H17V18Z"
             fill="#858997" />
         </svg>
-        {{ convertedDate }}
+        {{ course.date | date : 'd MMM, y' }}
       </div>
     </div>
     <div class="app-course-card__style-wrapper">

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FilterPipe } from 'src/app/shared/pipes/filter.pipe';
 import { CourseType } from 'src/app/utils/datatypes';
 import { BUTTONS_TEXT, COURSES } from 'src/app/utils/mock-items';
 
@@ -8,11 +9,26 @@ import { BUTTONS_TEXT, COURSES } from 'src/app/utils/mock-items';
   styleUrls: ['./courses-list.component.css'],
 })
 export class CoursesListComponent implements OnInit {
+  searchText?: string;
   courses: CourseType[] = [];
   loadMoreText = BUTTONS_TEXT.MORE;
 
+  filteredCourses: CourseType[] = [];
+  orderedBy: 'asc' | 'desc' = 'asc';
+
   ngOnInit() {
     this.courses = COURSES;
+    this.filteredCourses = this.courses;
+  }
+
+  applyFilter(searchText: string) {
+    this.searchText = searchText;
+    this.filteredCourses = this.filterCoursesByName(searchText);
+  }
+
+  private filterCoursesByName(searchText: string): CourseType[] {
+    const filterPipe = new FilterPipe();
+    return filterPipe.transform(this.courses, searchText);
   }
 
   onLoadingMore() {

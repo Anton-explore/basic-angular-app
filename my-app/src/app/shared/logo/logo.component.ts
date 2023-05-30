@@ -5,4 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './logo.component.html',
   styleUrls: ['./logo.component.css'],
 })
-export class LogoComponent {}
+export class LogoComponent {
+  siteTitle = 'Video Course';
+}

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { BUTTONS_TEXT, INPUTS_TEXT } from 'src/app/utils/mock-items';
 
 @Component({
@@ -11,11 +11,15 @@ export class SearchBarComponent {
   addText: string = BUTTONS_TEXT.ADD;
   searchText: string = BUTTONS_TEXT.SRCH;
   inputValue!: string;
+  @Output() searchStarts: EventEmitter<string> = new EventEmitter<string>();
 
-  onSearch(searchInput: HTMLInputElement): void {
-    this.inputValue = searchInput.value;
-    console.log('Search value:', searchInput.value);
-    searchInput.value = '';
+  onSearch(): void {
+    this.searchStarts.emit(this.inputValue);
+  }
+  clearInput() {
+    if (this.inputValue === '') {
+      this.searchStarts.emit(this.inputValue);
+    }
   }
 
   onAddingCourse(): void {

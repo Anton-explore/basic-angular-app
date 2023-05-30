@@ -2,6 +2,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CourseCardComponent } from './course-card.component';
 import { CourseType } from 'src/app/utils/datatypes';
+import { HighlightBorderDirective } from '../directives/highlight-border.directive';
+import { DurationPipe } from '../pipes/duration.pipe';
+import { TopRatedDirective } from '../directives/top-rated.directive';
 
 describe('CourseCardComponent', () => {
   let component: CourseCardComponent;
@@ -13,17 +16,15 @@ describe('CourseCardComponent', () => {
     name: 'Test course',
     description: 'Some simple description',
   };
-  const mockedCourse1: CourseType = {
-    id: 2,
-    length: 40,
-    date: '8/9/2020',
-    name: 'Test course',
-    description: 'Some simple description',
-  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CourseCardComponent],
+      declarations: [
+        CourseCardComponent,
+        HighlightBorderDirective,
+        TopRatedDirective,
+        DurationPipe,
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(CourseCardComponent);
@@ -51,15 +52,5 @@ describe('CourseCardComponent', () => {
   it('should have correct buttons text', () => {
     expect(component.editText).toBe('Edit');
     expect(component.deleteText).toBe('Delete');
-  });
-
-  it('should format the duration more than hour correctly', () => {
-    expect(component.formattedDuration).toBe('2h 00 min');
-  });
-
-  it('should format the duration less than hour correctly', () => {
-    component.course = mockedCourse1;
-    component.ngOnInit();
-    expect(component.formattedDuration).toBe('40 min');
   });
 });

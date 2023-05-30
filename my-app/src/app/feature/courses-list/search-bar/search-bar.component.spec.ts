@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SearchBarComponent } from './search-bar.component';
+import { FormsModule } from '@angular/forms';
 
 describe('SearchBarComponent', () => {
   let component: SearchBarComponent;
@@ -8,6 +9,7 @@ describe('SearchBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [FormsModule],
       declarations: [SearchBarComponent],
     }).compileComponents();
 
@@ -26,21 +28,27 @@ describe('SearchBarComponent', () => {
     expect(component.placeholder).toContain('Type to search');
   });
 
-  it('should update the inputValue property and log the search value on onSearch method call', () => {
-    const searchInput =
-      fixture.nativeElement.querySelector('.app-input__search');
+  it('should update the inputValue property and pass it into event when on onSearch method called', () => {
     const inputValue = 'example search';
 
-    searchInput.value = inputValue;
-    searchInput.dispatchEvent(new Event('input'));
+    component.inputValue = inputValue;
     fixture.detectChanges();
 
-    spyOn(console, 'log');
-    component.onSearch(searchInput);
+    spyOn(component.searchStarts, 'emit');
+    component.onSearch();
 
-    expect(component.inputValue).toBe(inputValue);
-    expect(console.log).toHaveBeenCalledWith('Search value:', inputValue);
-    expect(searchInput.value).toBe('');
+    expect(component.searchStarts.emit).toHaveBeenCalledWith(inputValue);
+  });
+
+  it('should emit an event when inputValue property is empty', () => {
+    const inputValue = '';
+
+    component.inputValue = inputValue;
+    spyOn(component.searchStarts, 'emit');
+    fixture.detectChanges();
+
+    component.clearInput();
+    expect(component.searchStarts.emit).toHaveBeenCalledWith(inputValue);
   });
 
   it('should log "Adding course" when onAddingCourse method is called', () => {

@@ -3,9 +3,11 @@
     <input
       class="app-input__search"
       type="text"
-      #searchInput
-      [placeholder]="placeholder" />
-    <button class="app-button__search" (click)="onSearch(searchInput)">
+      name="searchBar"
+      [(ngModel)]="inputValue"
+      [placeholder]="placeholder"
+      (input)="clearInput()" />
+    <button class="app-button__search" (click)="onSearch()">
       {{ searchText }}
     </button>
   </form>

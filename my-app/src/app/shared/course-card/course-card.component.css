@@ -37,5 +37,12 @@
 }
 
 .app-course-card__top-rated {
-  border: 2px solid yellowgreen;
+  background: linear-gradient(180deg, #fffce1 0%, #dbd27e 178.76%);
+  border: 2px solid #e8da91;
+}
+
+.app-course-card__title__top-rated::after {
+  content: '★';
+  color: #ffd700;
+  margin-left: 5px;
 }

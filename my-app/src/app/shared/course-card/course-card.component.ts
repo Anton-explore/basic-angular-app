@@ -1,9 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CourseType } from 'src/app/utils/datatypes';
-import {
-  convertToLocalDate,
-  formatDuration,
-} from 'src/app/utils/formatHelpers';
 import { BUTTONS_TEXT } from 'src/app/utils/mock-items';
 
 @Component({
@@ -26,10 +22,6 @@ export class CourseCardComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.course) {
-      this.formattedDuration = formatDuration(this.course.length);
-      this.convertedDate = convertToLocalDate(this.course.date);
-    }
     console.log('ngOnInit was called!');
   }
 

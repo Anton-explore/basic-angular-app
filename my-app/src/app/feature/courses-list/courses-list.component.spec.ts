@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CoursesListComponent } from './courses-list.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FeatureModule } from '../feature.module';
-import { COURSES } from 'src/app/utils/mock-items';
+import { COURSES, filteredCourses } from 'src/app/utils/mock-items';
 import { CourseType } from 'src/app/utils/datatypes';
 
 describe('CoursesListComponent', () => {
@@ -16,6 +16,7 @@ describe('CoursesListComponent', () => {
     name: 'Test course',
     description: 'Some simple description',
   };
+  const testCourses: CourseType[] = filteredCourses;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -47,7 +48,10 @@ describe('CoursesListComponent', () => {
   });
 
   it('should track courses by their id', () => {
-    const result = component.trackCourseById(course);
+    const result = component.trackCourseById(
+      component.courses.indexOf(course),
+      course
+    );
     expect(result).toBe(course.id);
   });
 
@@ -84,6 +88,15 @@ describe('CoursesListComponent', () => {
       expect(console.log).toHaveBeenCalledWith(
         `You delete course with ID: ${courseId}`
       );
+    });
+  });
+
+  describe('filter pipe for courses', () => {
+    it('should apply the filter and update the filteredCourses array', () => {
+      const searchText = 'script';
+      component.applyFilter(searchText);
+      expect(component.searchText).toEqual(searchText);
+      expect(component.filteredCourses).toEqual(testCourses);
     });
   });
 });
