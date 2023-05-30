@@ -1,5 +1,17 @@
 # basic-angular-app
 
+## Homework 4
+
+### Evaluation criteria
+
+1. Implemented build-in directives and pipes.
+2. Built-in+partially custom pipes and directives. Major issues.
+3. Built-in+custom. Did all with some issues. orderBy not implemented.
+4. Did all above including orderBy pipe without major issues.
+#### Extra task
+ Cover custom directives and pipes with unit tests.
+
+
 ## Homework 3
 
 ### Evaluation criteria
