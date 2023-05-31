@@ -1,4 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  faCalendar,
+  faClock,
+  faPen,
+  faTrash,
+} from '@fortawesome/free-solid-svg-icons';
 import { CourseType } from 'src/app/utils/datatypes';
 import { BUTTONS_TEXT } from 'src/app/utils/mock-items';
 
@@ -16,6 +22,10 @@ export class CourseCardComponent implements OnInit {
   convertedDate!: string;
   editText = BUTTONS_TEXT.EDIT;
   deleteText = BUTTONS_TEXT.DEL;
+  clockIcon = faClock;
+  calendarIcon = faCalendar;
+  penIcon = faPen;
+  trashIcon = faTrash;
 
   constructor() {
     console.log('Constructor was called!');

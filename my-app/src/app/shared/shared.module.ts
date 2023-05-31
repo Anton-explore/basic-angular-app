@@ -8,6 +8,7 @@ import { TopRatedDirective } from './directives/top-rated.directive';
 import { DurationPipe } from './pipes/duration.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { OrderByPipe } from './pipes/order-by.pipe';
     FilterPipe,
     OrderByPipe,
   ],
-  imports: [CommonModule],
+  imports: [CommonModule, FontAwesomeModule],
   exports: [
     LogoComponent,
     CourseCardComponent,
