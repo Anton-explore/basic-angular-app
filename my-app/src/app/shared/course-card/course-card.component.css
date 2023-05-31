@@ -4,7 +4,7 @@
   border-radius: 6px;
   background-color: #ffff;
   padding: 24px;
-  box-shadow: 0 1px 2px 0 rgba(29, 30, 38, 0.1),
+  box-shadow: 0 1px 2px 0 rgba(29, 31, 38, 0.1),
     0 2px 10px 0 rgba(29, 30, 38, 0.15);
 }
 
@@ -34,4 +34,15 @@
   line-height: 12px;
   height: 24px;
   width: 71px;
+}
+
+.app-course-card__top-rated {
+  background: linear-gradient(180deg, #fffce1 0%, #dbd27e 178.76%);
+  border: 2px solid #e8da91;
+}
+
+.app-course-card__title__top-rated::after {
+  content: '★';
+  color: #ffd700;
+  margin-left: 5px;
 }

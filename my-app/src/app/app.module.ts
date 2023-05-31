@@ -9,6 +9,7 @@ import { FooterComponent } from './core/footer/footer.component';
 import { FeatureModule } from './feature/feature.module';
 import { MainSectionComponent } from './core/main-section/main-section.component';
 import { SharedModule } from './shared/shared.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { SharedModule } from './shared/shared.module';
     FeatureModule,
     AppRoutingModule,
     FormsModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent],
