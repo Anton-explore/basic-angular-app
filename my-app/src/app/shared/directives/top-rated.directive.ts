@@ -11,22 +11,18 @@ export class TopRatedDirective implements OnInit {
   ngOnInit(): void {
     if (this.isTopRated) {
       this.addStarIcon();
+      this.setBackgroundColor();
     }
-    this.setBackgroundColor();
   }
 
   private addStarIcon(): void {
     const courseTitle = this.elementRef.nativeElement.querySelector(
       '.app-course-card__title'
     );
-    if (courseTitle) {
-      courseTitle.classList.add('app-course-card__title__top-rated');
-    }
+    courseTitle.classList.add('app-course-card__title__top-rated');
   }
 
   private setBackgroundColor(): void {
-    if (this.isTopRated) {
-      this.elementRef.nativeElement.classList.add('app-course-card__top-rated');
-    }
+    this.elementRef.nativeElement.classList.add('app-course-card__top-rated');
   }
 }

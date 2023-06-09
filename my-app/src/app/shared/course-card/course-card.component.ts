@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+
 import {
   faCalendar,
   faClock,
@@ -26,10 +27,6 @@ export class CourseCardComponent implements OnInit {
   calendarIcon = faCalendar;
   penIcon = faPen;
   trashIcon = faTrash;
-
-  constructor() {
-    console.log('Constructor was called!');
-  }
 
   ngOnInit() {
     console.log('ngOnInit was called!');

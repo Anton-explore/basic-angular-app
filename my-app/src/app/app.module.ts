@@ -10,6 +10,8 @@ import { FeatureModule } from './feature/feature.module';
 import { MainSectionComponent } from './core/main-section/main-section.component';
 import { SharedModule } from './shared/shared.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CoursesService } from './shared/services/courses.service';
+import { AuthService } from './shared/services/auth.service';
 
 @NgModule({
   declarations: [
@@ -24,9 +26,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FeatureModule,
     AppRoutingModule,
     FormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
   ],
-  providers: [],
+  providers: [AuthService, CoursesService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

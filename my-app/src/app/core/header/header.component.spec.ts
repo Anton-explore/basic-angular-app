@@ -4,19 +4,23 @@ import { HeaderComponent } from './header.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
+  let authService: AuthService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [RouterModule, AppRoutingModule, SharedModule],
       declarations: [HeaderComponent],
+      providers: [AuthService],
     }).compileComponents();
 
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
+    authService = TestBed.inject(AuthService);
     fixture.detectChanges();
   });
 
@@ -24,37 +28,21 @@ describe('HeaderComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should initial have button with "Login" text and false status of logging', () => {
-    expect(component.buttonText).toBe('Login');
-    expect(component.isLoggedIn).toBeFalse();
+  it('should initialize properties correctly', () => {
+    expect(component.buttonText).toEqual('Sign Out');
+    expect(component.isAuth).toBeFalse();
+    expect(component.user).toBeNull();
   });
 
-  it('should change button text and logging status when onLogging method is called', () => {
-    component.onLogging();
-
-    expect(component.buttonText).toBe('Log out');
-    expect(component.isLoggedIn).toBeTrue();
-
-    component.onLogging();
-    expect(component.buttonText).toBe('Login');
-    expect(component.isLoggedIn).toBeFalse();
-  });
-
-  it('should log "Logging in.." when button with text "Login" is clicked', () => {
+  it('should call authService.logout(), update user info, and log a message when logOut() is called', () => {
+    spyOn(authService, 'logout');
     spyOn(console, 'log');
-    expect(component.buttonText).toBe('Login');
-    expect(component.isLoggedIn).toBeFalse();
+    spyOn(component, 'updateUserInfo');
 
-    component.onLogging();
+    component.logOut();
 
-    expect(console.log).toHaveBeenCalledWith('Logging in..');
-  });
-
-  it('should log "Logging off.." when button with text "Log out" is clicked', () => {
-    spyOn(console, 'log');
-    component.buttonText = 'Log out';
-    component.isLoggedIn = true;
-    component.onLogging();
+    expect(authService.logout).toHaveBeenCalled();
     expect(console.log).toHaveBeenCalledWith('Logging off..');
+    expect(component.updateUserInfo).toHaveBeenCalled();
   });
 });

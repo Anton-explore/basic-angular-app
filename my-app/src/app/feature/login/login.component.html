@@ -1,0 +1,23 @@
+<div class="app-login-page-wrapper">
+  <div class="app-login-page">
+    <h2>Login</h2>
+    <div class="app-login-form">
+      <label for="email">Email:</label>
+      <input
+        type="email"
+        id="email"
+        [(ngModel)]="email"
+        placeholder="Enter your email" />
+      <label for="password">Password:</label>
+      <input
+        type="password"
+        id="password"
+        [(ngModel)]="password"
+        placeholder="Enter your password" />
+    </div>
+    <div class="app-login-button-wrapper">
+      <a href="/"><span>Forgot password?</span></a>
+      <button class="app-login-button" (click)="login()">Login</button>
+    </div>
+  </div>
+</div>
