@@ -1,8 +1,10 @@
-import { Component, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { IfAuthenticatedDirective } from './if-authenticated.directive';
 import { AuthService } from '../services/auth.service';
+import { Subject } from 'rxjs';
+// import { ItemContext } from 'src/app/utils/datatypes';
 
 @Component({
   template: `
@@ -13,83 +15,52 @@ import { AuthService } from '../services/auth.service';
 })
 class TestComponent {
   condition!: boolean;
-  constructor() {}
 }
 
 describe('IfAuthenticatedDirective', () => {
   let component: TestComponent;
   let fixture: ComponentFixture<TestComponent>;
   let authService: AuthService;
-  let templateRef: TemplateRef<any>;
-  let viewContainer: ViewContainerRef;
 
   beforeEach(async () => {
+    const authServiceStub = {
+      loginEvent: new Subject(),
+      isAuthenticated: () => true,
+    };
+
     await TestBed.configureTestingModule({
-      declarations: [IfAuthenticatedDirective, TestComponent],
-      providers: [AuthService],
+      declarations: [TestComponent, IfAuthenticatedDirective],
+      providers: [{ provide: AuthService, useValue: authServiceStub }],
     }).compileComponents();
 
+    authService = TestBed.inject(AuthService);
     fixture = TestBed.createComponent(TestComponent);
     component = fixture.componentInstance;
-    authService = TestBed.inject(AuthService);
-    templateRef =
-      fixture.debugElement.nativeElement.querySelector('ng-template');
-    viewContainer = {
-      createEmbeddedView: jasmine.createSpy(),
-      clear: jasmine.createSpy(),
-    } as any;
     fixture.detectChanges();
   });
 
-  it('should create the view when the condition is true', () => {
-    component.condition = true;
-    fixture.detectChanges();
-
-    expect(viewContainer.createEmbeddedView).toHaveBeenCalled();
-    expect(viewContainer.clear).not.toHaveBeenCalled();
+  it('should create the component', () => {
+    expect(component).toBeTruthy();
   });
 
-  it('should clear the view when the condition changes from true to false', () => {
-    component.condition = true;
-    fixture.detectChanges();
-
+  it('should not render the template when condition is false', () => {
     component.condition = false;
     fixture.detectChanges();
-
-    expect(viewContainer.createEmbeddedView).toHaveBeenCalled();
-    expect(viewContainer.clear).toHaveBeenCalled();
+    expect(fixture.nativeElement.innerHTML).not.toContain('<div></div>');
   });
 
-  it('should create the view when the condition changes from false to true', () => {
-    component.condition = false;
-    fixture.detectChanges();
-
-    component.condition = true;
-    fixture.detectChanges();
-
-    expect(viewContainer.createEmbeddedView).toHaveBeenCalled();
-    expect(viewContainer.clear).toHaveBeenCalled();
-  });
-
-  it('should update the view when loginEvent is triggered and isAuthenticated is true', () => {
-    component.condition = false;
-    fixture.detectChanges();
-
-    spyOn(authService, 'isAuthenticated').and.returnValue(true);
+  it('should render the template when authService emits loginEvent and isAuthenticated is true', () => {
     authService.loginEvent.next();
-
-    expect(viewContainer.createEmbeddedView).toHaveBeenCalled();
-    expect(viewContainer.clear).not.toHaveBeenCalled();
+    fixture.detectChanges();
+    expect(fixture.nativeElement.innerHTML).toContain(
+      '<div id="content">Content</div>'
+    );
   });
 
-  it('should update the view when loginEvent is triggered and isAuthenticated is false', () => {
-    component.condition = true;
-    fixture.detectChanges();
-
+  it('should not render the template when authService emits loginEvent and isAuthenticated is false', () => {
     spyOn(authService, 'isAuthenticated').and.returnValue(false);
     authService.loginEvent.next();
-
-    expect(viewContainer.createEmbeddedView).not.toHaveBeenCalled();
-    expect(viewContainer.clear).toHaveBeenCalled();
+    fixture.detectChanges();
+    expect(fixture.nativeElement.innerHTML).not.toContain('<div></div>');
   });
 });

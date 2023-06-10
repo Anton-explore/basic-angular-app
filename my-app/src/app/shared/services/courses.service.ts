@@ -7,10 +7,10 @@ import { COURSES } from 'src/app/utils/mock-items';
   providedIn: 'root',
 })
 export class CoursesService {
-  private courses: CourseType[] = Object.assign(COURSES);
+  private courses: CourseType[] = COURSES;
 
   getCourses(): CourseType[] {
-    return this.courses;
+    return this.courses || [];
   }
 
   getCourseById(id: number): CourseType | undefined {

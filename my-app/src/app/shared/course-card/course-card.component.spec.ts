@@ -5,6 +5,7 @@ import { CourseType } from 'src/app/utils/datatypes';
 import { HighlightBorderDirective } from '../directives/highlight-border.directive';
 import { DurationPipe } from '../pipes/duration.pipe';
 import { TopRatedDirective } from '../directives/top-rated.directive';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 describe('CourseCardComponent', () => {
   let component: CourseCardComponent;
@@ -25,6 +26,7 @@ describe('CourseCardComponent', () => {
         TopRatedDirective,
         DurationPipe,
       ],
+      imports: [FontAwesomeModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(CourseCardComponent);

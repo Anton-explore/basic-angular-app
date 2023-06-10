@@ -21,7 +21,7 @@ describe('AuthService', () => {
     expectedUser = {
       email,
       firstName: 'TestUser',
-      lastName: 'Test',
+      lastName: 'TestSurname',
       id: '12345',
     };
     expectedToken = 'some_fake_token' + email;

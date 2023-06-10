@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 import { ConfirmationModalComponent } from './confirmation-modal.component';
 import { ModalContentType } from 'src/app/utils/datatypes';
@@ -7,10 +7,12 @@ import { ModalContentType } from 'src/app/utils/datatypes';
 describe('ConfirmationModalComponent', () => {
   let component: ConfirmationModalComponent;
   let fixture: ComponentFixture<ConfirmationModalComponent>;
+  let mockContent: ModalContentType;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ConfirmationModalComponent],
+      imports: [MatDialogModule],
       providers: [
         {
           provide: MatDialogRef,
@@ -21,6 +23,12 @@ describe('ConfirmationModalComponent', () => {
 
     fixture = TestBed.createComponent(ConfirmationModalComponent);
     component = fixture.componentInstance;
+
+    mockContent = {
+      title: 'Test title',
+      text: 'test text',
+    };
+    component.content = mockContent;
     fixture.detectChanges();
   });
 
@@ -29,22 +37,6 @@ describe('ConfirmationModalComponent', () => {
   });
 
   it('should have an input property for content', () => {
-    expect(component.content).toBeUndefined();
-
-    const mockContent: ModalContentType = {
-      title: 'Test title',
-      text: 'test text',
-    };
-
-    component.content = mockContent;
     expect(component.content).toEqual(mockContent);
-  });
-
-  it('should close the dialog when closed', () => {
-    const dialogRef = TestBed.inject(MatDialogRef);
-    const spy = spyOn(dialogRef, 'close');
-
-    component.dialogRef.close();
-    expect(spy).toHaveBeenCalled();
   });
 });

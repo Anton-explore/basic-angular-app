@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 import { LoginComponent } from './login.component';
+import { FormsModule } from '@angular/forms';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -11,6 +12,7 @@ describe('LoginComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [LoginComponent],
+      imports: [FormsModule],
       providers: [AuthService],
     }).compileComponents();
 

@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SearchBarComponent } from './search-bar.component';
 import { FormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 describe('SearchBarComponent', () => {
   let component: SearchBarComponent;
@@ -9,8 +10,8 @@ describe('SearchBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FormsModule],
       declarations: [SearchBarComponent],
+      imports: [FormsModule, FontAwesomeModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(SearchBarComponent);

@@ -6,15 +6,16 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { ItemContext } from 'src/app/utils/datatypes';
 
 @Directive({
   selector: '[appIfAuthenticated]',
 })
-export class IfAuthenticatedDirective implements OnInit {
+export class IfAuthenticatedDirective<T> implements OnInit {
   private hasView = false;
   constructor(
     private authService: AuthService,
-    private templateRef: TemplateRef<any>,
+    private templateRef: TemplateRef<ItemContext<T>>,
     private viewContainer: ViewContainerRef
   ) {}
 

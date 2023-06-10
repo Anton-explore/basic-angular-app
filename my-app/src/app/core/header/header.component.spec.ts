@@ -29,7 +29,7 @@ describe('HeaderComponent', () => {
   });
 
   it('should initialize properties correctly', () => {
-    expect(component.buttonText).toEqual('Sign Out');
+    expect(component.buttonText).toEqual('Log out');
     expect(component.isAuth).toBeFalse();
     expect(component.user).toBeNull();
   });

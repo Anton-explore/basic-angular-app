@@ -23,3 +23,7 @@ export interface ModalContentType {
   title: string;
   text: string;
 }
+
+export interface ItemContext<T> {
+  $implicit: T;
+}

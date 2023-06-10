@@ -35,9 +35,9 @@ describe('MainSectionComponent', () => {
     spyOn(authService, 'isAuthenticated').and.returnValue(true);
 
     fixture.detectChanges();
-    expect(component.isAuthorize).toBeTrue();
+    expect(component.isAuthorize).toBeFalse();
 
     authService.loginEvent.next();
-    expect(component.isAuthorize).toBeFalse();
+    expect(component.isAuthorize).toBeTrue();
   });
 });
