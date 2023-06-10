@@ -1,5 +1,13 @@
 # basic-angular-app
 
+## Homework 5
+
+1. Added some simple markup + css for login page. Added services but not working.
+2. Partially done with critical issues.
+3. Added implementations dor services, login page. Created *ifAuthenticated directive.
+4. Did all above without major issues.
+#### Extra task
+ Proceed with unit testing. Now you have your first services. It's time to cover them with unit tests.
 ## Homework 4
 
 ### Evaluation criteria
