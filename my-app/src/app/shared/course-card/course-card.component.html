@@ -1,10 +1,13 @@
 <li
   class="app-courses-card"
   [ngClass]="{ 'app-course-card__top-rated': course.isTopRated }"
-  [appHighlightBorder]="course.date"
-  [appTopRated]="course.isTopRated">
+  [appHighlightBorder]="course.date">
   <div>
-    <h2 class="app-course-card__title">{{ course.name | uppercase }}</h2>
+    <h2
+      class="app-course-card__title"
+      [ngClass]="{ 'app-course-card__title__top-rated': course.isTopRated }">
+      {{ course.name | uppercase }}
+    </h2>
     <p>{{ course.description }}</p>
   </div>
   <div class="app-course-card__right-part">

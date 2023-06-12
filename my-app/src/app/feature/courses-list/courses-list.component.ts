@@ -31,6 +31,9 @@ export class CoursesListComponent implements OnInit {
 
   getCourses(): void {
     this.courses = this.coursesService.getCourses();
+    this.coursesService.coursesListChange.subscribe((courses: CourseType[]) => {
+      this.courses = courses;
+    });
   }
 
   applyFilter(searchText: string) {
@@ -69,6 +72,7 @@ export class CoursesListComponent implements OnInit {
       if (result) {
         this.coursesService.removeCourse(courseId);
         this.getCourses();
+        this.filteredCourses = this.courses;
         console.log(`You delete ${courseName} course with ID: ${courseId}`);
       }
     });

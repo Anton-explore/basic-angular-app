@@ -13,8 +13,8 @@ export class LoginComponent {
   constructor(private authService: AuthService) {}
 
   login() {
-    if (this.email && this.password) {
-      this.authService.login(this.email, this.password);
+    if (this.email.trim() && this.password.trim()) {
+      this.authService.login(this.email.trim(), this.password.trim());
       console.log('Logged in successfully');
     }
   }

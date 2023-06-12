@@ -13,7 +13,7 @@ describe('CoursesService', () => {
       providers: [CoursesService],
     });
     coursesService = TestBed.inject(CoursesService);
-    mockCourses = COURSES;
+    mockCourses = COURSES.slice();
   });
 
   it('should be created', () => {

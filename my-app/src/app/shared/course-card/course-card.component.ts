@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 
 import {
   faCalendar,
@@ -13,8 +19,9 @@ import { BUTTONS_TEXT } from 'src/app/utils/mock-items';
   selector: 'app-course-card',
   templateUrl: './course-card.component.html',
   styleUrls: ['./course-card.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CourseCardComponent implements OnInit {
+export class CourseCardComponent {
   @Input() course!: CourseType;
   @Output() courseEdited: EventEmitter<number> = new EventEmitter<number>();
   @Output() courseDeleted: EventEmitter<number> = new EventEmitter<number>();
@@ -27,10 +34,6 @@ export class CourseCardComponent implements OnInit {
   calendarIcon = faCalendar;
   penIcon = faPen;
   trashIcon = faTrash;
-
-  ngOnInit() {
-    console.log('ngOnInit was called!');
-  }
 
   onEditCourse(): void {
     this.courseEdited.emit(this.course.id);

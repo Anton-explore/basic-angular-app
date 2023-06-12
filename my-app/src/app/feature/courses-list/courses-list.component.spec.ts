@@ -38,8 +38,8 @@ describe('CoursesListComponent', () => {
       name: 'Test course',
       description: 'Some simple description',
     };
-    testCourses = filteredCourses;
-    initialCourses = COURSES;
+    testCourses = filteredCourses.slice();
+    initialCourses = COURSES.slice();
     coursesService = TestBed.inject(CoursesService);
     // dialog = TestBed.inject(MatDialog) as jasmine.SpyObj<MatDialog>;
     fixture = TestBed.createComponent(CoursesListComponent);

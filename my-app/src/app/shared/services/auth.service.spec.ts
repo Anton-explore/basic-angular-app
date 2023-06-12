@@ -1,10 +1,11 @@
 import { TestBed } from '@angular/core/testing';
+import { SpyObj } from '@types/jasmine';
 
 import { AuthService } from './auth.service';
 import { User } from 'src/app/utils/datatypes';
 
 describe('AuthService', () => {
-  let authService: AuthService;
+  let authService: SpyObj<AuthService>;
   let email: string;
   let password: string;
   let expectedUser: User;
@@ -14,7 +15,7 @@ describe('AuthService', () => {
     TestBed.configureTestingModule({
       providers: [AuthService],
     });
-    authService = TestBed.inject(AuthService);
+    authService = TestBed.inject(AuthService) as SpyObj<AuthService>;
 
     email = 'test@example.com';
     password = '1234';
@@ -64,7 +65,7 @@ describe('AuthService', () => {
     });
 
     it('should emit the login event when login is successful', () => {
-      spyOn(authService.loginEvent, 'emit');
+      // spyOn(authService.loginEvent, 'emit');
 
       authService.login('test@example.com', '1234');
 
@@ -92,7 +93,7 @@ describe('AuthService', () => {
     });
 
     it('should emit event when logout', () => {
-      spyOn(authService.loginEvent, 'emit');
+      // spyOn(authService.loginEvent, 'emit');
       authService.logout();
       expect(authService.loginEvent.emit).toHaveBeenCalled();
     });

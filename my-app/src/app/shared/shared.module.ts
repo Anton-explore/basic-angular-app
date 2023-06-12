@@ -6,7 +6,6 @@ import { LogoComponent } from './logo/logo.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { CourseCardComponent } from './course-card/course-card.component';
 import { HighlightBorderDirective } from './directives/highlight-border.directive';
-import { TopRatedDirective } from './directives/top-rated.directive';
 import { DurationPipe } from './pipes/duration.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
@@ -20,7 +19,6 @@ import { ConfirmationModalComponent } from './confirmation-modal/confirmation-mo
     CourseCardComponent,
     BreadcrumbsComponent,
     HighlightBorderDirective,
-    TopRatedDirective,
     DurationPipe,
     FilterPipe,
     OrderByPipe,
@@ -33,7 +31,6 @@ import { ConfirmationModalComponent } from './confirmation-modal/confirmation-mo
     CourseCardComponent,
     BreadcrumbsComponent,
     HighlightBorderDirective,
-    TopRatedDirective,
     DurationPipe,
     FilterPipe,
     OrderByPipe,

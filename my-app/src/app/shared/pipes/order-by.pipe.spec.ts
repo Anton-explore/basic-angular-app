@@ -18,7 +18,7 @@ describe('OrderByPipe', () => {
 
   beforeEach(() => {
     pipe = new OrderByPipe();
-    courses = COURSES;
+    courses = COURSES.slice();
   });
 
   it('should create an instance', () => {
