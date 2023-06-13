@@ -1,0 +1,22 @@
+<div class="app-modal-wrapper">
+  <h2 mat-dialog-title>{{ content.title }}</h2>
+  <hr />
+  <mat-dialog-content>
+    <ng-container>{{ content.text }}</ng-container>
+  </mat-dialog-content>
+  <hr />
+  <mat-dialog-actions align="end">
+    <button
+      mat-button
+      mat-dialog-close
+      class="app-button app-button-modal-cancel">
+      Cancel
+    </button>
+    <button
+      mat-button
+      [mat-dialog-close]="true"
+      class="app-button app-button-modal-delete">
+      Yes, delete
+    </button>
+  </mat-dialog-actions>
+</div>

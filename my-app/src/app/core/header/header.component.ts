@@ -1,4 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
+import {
+  faArrowRightFromBracket,
+  faArrowRightToBracket,
+  faCircleUser,
+} from '@fortawesome/free-solid-svg-icons';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { User } from 'src/app/utils/datatypes';
 
 import { BUTTONS_TEXT } from 'src/app/utils/mock-items';
 
@@ -7,20 +14,36 @@ import { BUTTONS_TEXT } from 'src/app/utils/mock-items';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
-export class HeaderComponent {
-  buttonText: string = BUTTONS_TEXT.IN;
-  isLoggedIn = false;
-  user = 'User login';
+export class HeaderComponent implements OnInit {
+  buttonText: string = BUTTONS_TEXT.OUT;
+  isAuth = false;
+  user: User | null = null;
+  loginIcon = faArrowRightToBracket;
+  logoutIcon = faArrowRightFromBracket;
+  userIcon = faCircleUser;
 
-  onLogging(): void {
-    if (this.buttonText === BUTTONS_TEXT.IN) {
-      this.buttonText = BUTTONS_TEXT.OUT;
-      this.isLoggedIn = !this.isLoggedIn;
-      console.log('Logging in..');
-    } else {
-      this.buttonText = BUTTONS_TEXT.IN;
-      this.isLoggedIn = !this.isLoggedIn;
-      console.log('Logging off..');
+  constructor(
+    private authService: AuthService,
+    private changeDetectorRef: ChangeDetectorRef
+  ) {}
+
+  ngOnInit() {
+    this.authService.loginEvent.subscribe(() => {
+      this.updateUserInfo();
+    });
+  }
+
+  updateUserInfo() {
+    this.isAuth = this.authService.isAuthenticated();
+    if (this.isAuth) {
+      this.user = this.authService.getUserInfo();
     }
+  }
+
+  logOut(): void {
+    this.authService.logout();
+    this.isAuth = this.authService.isAuthenticated();
+    console.log('Logging off..');
+    this.updateUserInfo();
   }
 }

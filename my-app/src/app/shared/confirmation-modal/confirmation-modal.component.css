@@ -1,0 +1,29 @@
+.app-modal-wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+}
+
+mat-dialog-actions {
+  gap: 10px;
+}
+
+.app-button {
+  padding: 10px;
+}
+.app-button-modal-delete {
+  margin-right: 10px;
+  background: #67a300;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  height: 40px;
+}
+
+.app-button-modal-cancel {
+  background: #fff;
+  color: #6c6f80;
+  border: 1px solid #acafbf;
+  border-radius: 6px;
+  height: 40px;
+}

@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationModalComponent } from 'src/app/shared/confirmation-modal/confirmation-modal.component';
 import { FilterPipe } from 'src/app/shared/pipes/filter.pipe';
+import { CoursesService } from 'src/app/shared/services/courses.service';
 import { CourseType } from 'src/app/utils/datatypes';
-import { BUTTONS_TEXT, COURSES } from 'src/app/utils/mock-items';
+import { BUTTONS_TEXT } from 'src/app/utils/mock-items';
 
 @Component({
   selector: 'app-courses-list',
@@ -16,9 +19,21 @@ export class CoursesListComponent implements OnInit {
   filteredCourses: CourseType[] = [];
   orderedBy: 'asc' | 'desc' = 'asc';
 
+  constructor(
+    private coursesService: CoursesService,
+    private dialog: MatDialog
+  ) {}
+
   ngOnInit() {
-    this.courses = COURSES;
+    this.getCourses();
     this.filteredCourses = this.courses;
+  }
+
+  getCourses(): void {
+    this.courses = this.coursesService.getCourses();
+    this.coursesService.coursesListChange.subscribe((courses: CourseType[]) => {
+      this.courses = courses;
+    });
   }
 
   applyFilter(searchText: string) {
@@ -44,6 +59,22 @@ export class CoursesListComponent implements OnInit {
   }
 
   onCourseDeleted(courseId: number): void {
-    console.log('You delete course with ID: ' + courseId);
+    const deletedCourse = this.courses.find(course => course.id === courseId);
+    const courseName = deletedCourse?.name;
+
+    const dialogRef = this.dialog.open(ConfirmationModalComponent);
+    dialogRef.componentInstance.content = {
+      title: 'Delete course?',
+      text: `Are you sure you want to delete ${courseName} course?`,
+    };
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.coursesService.removeCourse(courseId);
+        this.getCourses();
+        this.filteredCourses = this.courses;
+        console.log(`You delete ${courseName} course with ID: ${courseId}`);
+      }
+    });
   }
 }

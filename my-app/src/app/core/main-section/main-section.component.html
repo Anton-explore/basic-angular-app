@@ -1,4 +1,7 @@
 <main class="app-main-section">
-  <app-breadcrumbs></app-breadcrumbs>
-  <app-courses-list></app-courses-list>
+  <app-login *ngIf="!isAuthorize"></app-login>
+  <div *appIfAuthenticated="isAuthorize">
+    <app-breadcrumbs></app-breadcrumbs>
+    <app-courses-list></app-courses-list>
+  </div>
 </main>

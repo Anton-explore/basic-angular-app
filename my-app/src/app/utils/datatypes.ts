@@ -11,9 +11,19 @@ export interface User {
   id: string;
   firstName: string;
   lastName: string;
+  email: string;
 }
 
 export interface AuthorType {
   id: number;
   name: string;
+}
+
+export interface ModalContentType {
+  title: string;
+  text: string;
+}
+
+export interface ItemContext<T> {
+  $implicit: T;
 }
