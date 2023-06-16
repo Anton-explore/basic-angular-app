@@ -1,0 +1,18 @@
+<div class="app-add-course-block">
+  <div class="app-label-wrapper">
+    <label for="duration">{{ label }}:</label>
+    <span>* required</span>
+  </div>
+  <div>
+    <input
+      type="number"
+      min="1"
+      id="duration"
+      [placeholder]="placeholder"
+      [(ngModel)]="duration"
+      (ngModelChange)="durationChange.emit(duration)" />
+    <span class="app-duration-counter" *ngIf="duration">{{
+      duration | duration
+    }}</span>
+  </div>
+</div>

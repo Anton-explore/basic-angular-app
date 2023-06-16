@@ -1,0 +1,21 @@
+.app-add-course-wrapper {
+  /* position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); */
+  width: 800px;
+  padding: 24px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #ffff;
+  box-shadow: 0 1px 2px 0 rgba(29, 30, 38, 0.1),
+    0 2px 10px 0 rgba(29, 30, 38, 0.15);
+}
+
+@media screen and (max-width: 800px) {
+  .app-add-course-wrapper {
+    width: 100vw;
+  }
+}

@@ -1,0 +1,12 @@
+<div class="app-add-course-block">
+  <div class="app-label-wrapper">
+    <label for="releaseDate">Date:</label>
+    <span>* required</span>
+  </div>
+  <input
+    type="date"
+    id="releaseDate"
+    placeholder="MM/DD/YYYY"
+    [(ngModel)]="releaseDate"
+    (ngModelChange)="releaseDateChange.emit(releaseDate)" />
+</div>

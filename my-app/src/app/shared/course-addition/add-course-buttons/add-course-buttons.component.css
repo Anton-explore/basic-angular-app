@@ -1,0 +1,24 @@
+.app-add-course-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: flex-end;
+}
+
+.app-button {
+  height: 40px;
+  width: 80px;
+  border-radius: 6px;
+  text-align: center;
+  border: none;
+}
+.app-button-save {
+  background: #67a300;
+  color: #fff;
+}
+
+.app-button-cancel {
+  background: rgba(18, 21, 35, 0.2);
+  color: #5b616f;
+  /* color: #6c6f80; */
+  /* border: 1px solid #acafbf; */
+}

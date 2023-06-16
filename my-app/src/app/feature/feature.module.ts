@@ -6,10 +6,21 @@ import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { LoginComponent } from './login/login.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AddCourseComponent } from './add-course/add-course.component';
 
 @NgModule({
-  declarations: [CoursesListComponent, SearchBarComponent, LoginComponent],
+  declarations: [
+    CoursesListComponent,
+    SearchBarComponent,
+    LoginComponent,
+    AddCourseComponent,
+  ],
   imports: [CommonModule, FormsModule, FontAwesomeModule, SharedModule],
-  exports: [CoursesListComponent, SearchBarComponent, LoginComponent],
+  exports: [
+    CoursesListComponent,
+    SearchBarComponent,
+    LoginComponent,
+    AddCourseComponent,
+  ],
 })
 export class FeatureModule {}

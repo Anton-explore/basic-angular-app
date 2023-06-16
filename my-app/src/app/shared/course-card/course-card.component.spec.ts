@@ -4,7 +4,6 @@ import { CourseCardComponent } from './course-card.component';
 import { CourseType } from 'src/app/utils/datatypes';
 import { HighlightBorderDirective } from '../directives/highlight-border.directive';
 import { DurationPipe } from '../pipes/duration.pipe';
-import { TopRatedDirective } from '../directives/top-rated.directive';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 describe('CourseCardComponent', () => {
@@ -23,7 +22,6 @@ describe('CourseCardComponent', () => {
       declarations: [
         CourseCardComponent,
         HighlightBorderDirective,
-        TopRatedDirective,
         DurationPipe,
       ],
       imports: [FontAwesomeModule],

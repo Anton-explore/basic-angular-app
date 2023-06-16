@@ -14,6 +14,7 @@ export class SearchBarComponent {
   addIcon = faCirclePlus;
   inputValue!: string;
   @Output() searchStarts: EventEmitter<string> = new EventEmitter<string>();
+  @Output() addingCourse: EventEmitter<void> = new EventEmitter<void>();
 
   onSearch(): void {
     this.searchStarts.emit(this.inputValue);
@@ -25,6 +26,6 @@ export class SearchBarComponent {
   }
 
   onAddingCourse(): void {
-    console.log('Adding course');
+    this.addingCourse.emit();
   }
 }

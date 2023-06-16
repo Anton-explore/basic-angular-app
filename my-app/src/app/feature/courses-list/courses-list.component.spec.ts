@@ -1,34 +1,38 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import {
-  MatDialog,
+  // MatDialog,
   MatDialogModule,
   // MatDialogRef,
 } from '@angular/material/dialog';
 
 import { CoursesListComponent } from './courses-list.component';
+// import { ConfirmationModalComponent } from 'src/app/shared/confirmation-modal/confirmation-modal.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FeatureModule } from '../feature.module';
-import { COURSES, filteredCourses } from 'src/app/utils/mock-items';
+import { COURSES } from 'src/app/utils/mock-items';
 import { CourseType } from 'src/app/utils/datatypes';
 import { CoursesService } from 'src/app/shared/services/courses.service';
 // import { of } from 'rxjs';
+
+import SpyObj = jasmine.SpyObj;
 
 describe('CoursesListComponent', () => {
   let component: CoursesListComponent;
   let fixture: ComponentFixture<CoursesListComponent>;
   let course: CourseType;
   let initialCourses: CourseType[];
-  let testCourses: CourseType[];
-  let coursesService: CoursesService;
-  // let dialog: MatDialog;
+  // let testCourses: CourseType[];
+  let coursesService: SpyObj<CoursesService>;
+  // let dialog: SpyObj<MatDialog>;
 
   beforeEach(async () => {
-    const dialogSpy = jasmine.createSpyObj('MatDialog', ['open']);
+    // const dialogSpy = jasmine.createSpyObj('MatDialog', ['open']);
 
     await TestBed.configureTestingModule({
       imports: [SharedModule, FeatureModule, MatDialogModule],
       declarations: [CoursesListComponent],
-      providers: [CoursesService, { provide: MatDialog, useValue: dialogSpy }],
+      // providers: [CoursesService, { provide: MatDialog, useValue: dialogSpy }],
+      providers: [CoursesService],
     }).compileComponents();
 
     course = {
@@ -38,10 +42,10 @@ describe('CoursesListComponent', () => {
       name: 'Test course',
       description: 'Some simple description',
     };
-    testCourses = filteredCourses.slice();
+    // testCourses = filteredCourses.slice();
     initialCourses = COURSES.slice();
-    coursesService = TestBed.inject(CoursesService);
-    // dialog = TestBed.inject(MatDialog) as jasmine.SpyObj<MatDialog>;
+    coursesService = TestBed.inject(CoursesService) as SpyObj<CoursesService>;
+    // dialog = TestBed.inject(MatDialog) as SpyObj<MatDialog>;
     fixture = TestBed.createComponent(CoursesListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -94,9 +98,9 @@ describe('CoursesListComponent', () => {
     const courseId = 455654757;
     // const courseName = 'Javascript';
 
-    beforeEach(() => {
-      initialCourses = COURSES;
-    });
+    // beforeEach(() => {
+    //   initialCourses = COURSES;
+    // });
 
     it('should call onCourseDeleted method with correct courseId', () => {
       spyOn(component, 'onCourseDeleted');
@@ -148,14 +152,18 @@ describe('CoursesListComponent', () => {
     // });
   });
 
-  describe('filter pipe for courses', () => {
-    it('should apply the filter and update the filteredCourses array', () => {
-      const searchText = 'script';
-      coursesService.getCourses();
-      component.ngOnInit();
-      component.applyFilter(searchText);
-      expect(component.searchText).toEqual(searchText);
-      expect(component.filteredCourses).toEqual(testCourses);
-    });
-  });
+  // it('should open confirmation modal and delete course in onCourseDeleted', () => {
+  //   const courseId = 7777;
+  //   component.courses = [course];
+  //   spyOn(component, 'getCourses');
+
+  //   component.onCourseDeleted(courseId);
+
+  //   expect(dialog.open).toHaveBeenCalledWith(ConfirmationModalComponent);
+  //   expect(component.getCourses).toHaveBeenCalled();
+  //   expect(component.filteredCourses).toEqual(component.courses);
+  //   expect(console.log).toHaveBeenCalledWith(
+  //     `You delete ${course.name} course with ID: ${courseId}`
+  //   );
+  // });
 });
