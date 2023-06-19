@@ -8,6 +8,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class MainSectionComponent implements OnInit {
   isAuthorize = false;
+  isAddingCourse = false;
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {

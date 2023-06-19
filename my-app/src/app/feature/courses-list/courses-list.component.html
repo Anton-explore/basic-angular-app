@@ -1,10 +1,14 @@
 <section class="app-courses-page">
-  <app-search-bar (searchStarts)="applyFilter($event)"></app-search-bar>
+  <app-search-bar
+    (searchStarts)="applyFilter($event)"
+    (addingCourse)="courseAddition.emit()"></app-search-bar>
   <ng-container *ngIf="filteredCourses.length; else emptyList">
     <ul class="app-courses-list">
       <app-course-card
         *ngFor="
-          let course of filteredCourses | orderBy : orderedBy : searchText;
+          let course of filteredCourses
+            | filter : searchText
+            | orderBy : orderedBy : searchText;
           trackBy: trackCourseById
         "
         [course]="course"

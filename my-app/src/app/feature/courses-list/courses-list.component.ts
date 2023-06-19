@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+
 import { ConfirmationModalComponent } from 'src/app/shared/confirmation-modal/confirmation-modal.component';
-import { FilterPipe } from 'src/app/shared/pipes/filter.pipe';
 import { CoursesService } from 'src/app/shared/services/courses.service';
 import { CourseType } from 'src/app/utils/datatypes';
 import { BUTTONS_TEXT } from 'src/app/utils/mock-items';
@@ -12,12 +12,13 @@ import { BUTTONS_TEXT } from 'src/app/utils/mock-items';
   styleUrls: ['./courses-list.component.css'],
 })
 export class CoursesListComponent implements OnInit {
-  searchText?: string;
+  searchText!: string;
   courses: CourseType[] = [];
   loadMoreText = BUTTONS_TEXT.MORE;
 
   filteredCourses: CourseType[] = [];
   orderedBy: 'asc' | 'desc' = 'asc';
+  @Output() courseAddition: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(
     private coursesService: CoursesService,
@@ -38,12 +39,6 @@ export class CoursesListComponent implements OnInit {
 
   applyFilter(searchText: string) {
     this.searchText = searchText;
-    this.filteredCourses = this.filterCoursesByName(searchText);
-  }
-
-  private filterCoursesByName(searchText: string): CourseType[] {
-    const filterPipe = new FilterPipe();
-    return filterPipe.transform(this.courses, searchText);
   }
 
   onLoadingMore() {

@@ -52,9 +52,9 @@ describe('SearchBarComponent', () => {
     expect(component.searchStarts.emit).toHaveBeenCalledWith(inputValue);
   });
 
-  it('should log "Adding course" when onAddingCourse method is called', () => {
-    spyOn(console, 'log');
+  it('should emit event when onAddingCourse method is called', () => {
+    spyOn(component.addingCourse, 'emit');
     component.onAddingCourse();
-    expect(console.log).toHaveBeenCalledWith('Adding course');
+    expect(component.addingCourse.emit).toHaveBeenCalled();
   });
 });

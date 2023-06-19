@@ -4,6 +4,18 @@
   bottom: 70px;
   left: 0;
   width: 100%;
+  background-color: #f5f6fa;
   overflow-y: auto;
   height: calc(100vh - 140px);
+  box-sizing: border-box;
+}
+.app-main-wrapper {
+  position: relative;
+  padding: 24px 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* height: 100vh; */
+  box-sizing: border-box;
 }

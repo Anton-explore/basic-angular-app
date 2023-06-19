@@ -1,0 +1,14 @@
+<div class="app-add-course-authors-block">
+  <div class="app-label-wrapper">
+    <label for="authors">Authors: </label>
+    <span>* required</span>
+  </div>
+  <select
+    multiple
+    [(ngModel)]="selectedAuthors"
+    (ngModelChange)="onAuthorsChange()">
+    <option *ngFor="let author of authors" [value]="author">
+      {{ author }}
+    </option>
+  </select>
+</div>

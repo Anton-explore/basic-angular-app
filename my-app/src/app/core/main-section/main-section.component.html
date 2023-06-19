@@ -2,6 +2,15 @@
   <app-login *ngIf="!isAuthorize"></app-login>
   <div *appIfAuthenticated="isAuthorize">
     <app-breadcrumbs></app-breadcrumbs>
-    <app-courses-list></app-courses-list>
+    <div class="app-main-wrapper">
+      <app-courses-list
+        *ngIf="!isAddingCourse; else courseAddition"
+        (courseAddition)="isAddingCourse = true">
+      </app-courses-list>
+      <ng-template #courseAddition>
+        <app-add-course
+          (cancelAddition)="isAddingCourse = false"></app-add-course>
+      </ng-template>
+    </div>
   </div>
 </main>

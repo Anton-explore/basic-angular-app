@@ -1,0 +1,13 @@
+<div class="app-add-course-block">
+  <div class="app-label-wrapper">
+    <label for="courseDescription">Description:</label>
+    <span>* required</span>
+  </div>
+  <textarea
+    id="courseDescription"
+    [(ngModel)]="courseDescription"
+    [placeholder]="placeholder"
+    (ngModelChange)="
+      courseDescriptionChange.emit(courseDescription)
+    "></textarea>
+</div>

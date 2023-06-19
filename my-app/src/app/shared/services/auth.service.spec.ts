@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { SpyObj } from '@types/jasmine';
+import SpyObj = jasmine.SpyObj;
 
 import { AuthService } from './auth.service';
 import { User } from 'src/app/utils/datatypes';
@@ -65,7 +65,7 @@ describe('AuthService', () => {
     });
 
     it('should emit the login event when login is successful', () => {
-      // spyOn(authService.loginEvent, 'emit');
+      spyOn(authService.loginEvent, 'emit');
 
       authService.login('test@example.com', '1234');
 
@@ -93,7 +93,7 @@ describe('AuthService', () => {
     });
 
     it('should emit event when logout', () => {
-      // spyOn(authService.loginEvent, 'emit');
+      spyOn(authService.loginEvent, 'emit');
       authService.logout();
       expect(authService.loginEvent.emit).toHaveBeenCalled();
     });

@@ -10,7 +10,7 @@ export class CoursesService {
   coursesListChange: EventEmitter<CourseType[]> = new EventEmitter<
     CourseType[]
   >();
-  private courses: CourseType[] = COURSES;
+  private courses: CourseType[] = COURSES.slice();
 
   getCourses(): CourseType[] {
     return this.courses.slice() || [];
