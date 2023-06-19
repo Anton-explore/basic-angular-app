@@ -7,7 +7,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   styleUrls: ['./main-section.component.css'],
 })
 export class MainSectionComponent implements OnInit {
-  isAuthorize = true;
+  isAuthorize = false;
   isAddingCourse = false;
   constructor(private authService: AuthService) {}
 

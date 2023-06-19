@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CourseDurationComponent } from './course-duration.component';
+import { FormsModule } from '@angular/forms';
 
 describe('CourseDurationComponent', () => {
   let component: CourseDurationComponent;
@@ -8,9 +9,9 @@ describe('CourseDurationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CourseDurationComponent ]
-    })
-    .compileComponents();
+      declarations: [CourseDurationComponent],
+      imports: [FormsModule],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(CourseDurationComponent);
     component = fixture.componentInstance;
