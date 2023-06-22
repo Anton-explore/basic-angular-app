@@ -1,13 +1,37 @@
 # basic-angular-app
 
+
+## Homework 7
+
+1. Implemented simple routing.
+2. Implemented all redirects on courses and edit pages.
+3. Implemented breadcrumbs. All above with issues.
+4. Did all above including guard without major issues.
+#### Extra task
+ 1. Use lazy loading.
+ 2. Define your own RouteReuseStrategy. When user opens edit page and navigates back - reuse cached course list component.
+
+
+## Homework 6
+
+1. Added some simple markup + css without splitting into components. Unable to run app.
+2. Partially done with critical issues.
+3. Added implementations for all components, with some major issues.
+4. Did all above without major issues.
+#### Extra task
+ Your tests might fail with updated change detection strategy. Fix issues related.
+
+
 ## Homework 5
 
 1. Added some simple markup + css for login page. Added services but not working.
 2. Partially done with critical issues.
-3. Added implementations dor services, login page. Created *ifAuthenticated directive.
+3. Added implementations for services, login page. Created *ifAuthenticated directive.
 4. Did all above without major issues.
 #### Extra task
  Proceed with unit testing. Now you have your first services. It's time to cover them with unit tests.
+
+
 ## Homework 4
 
 ### Evaluation criteria

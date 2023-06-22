@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
@@ -10,12 +11,15 @@ export class LoginComponent {
   email = '';
   password = '';
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   login() {
     if (this.email.trim() && this.password.trim()) {
       this.authService.login(this.email.trim(), this.password.trim());
-      console.log('Logged in successfully');
+      if (this.authService.isAuthenticated()) {
+        this.router.navigateByUrl('/courses');
+        console.log('Logged in successfully');
+      }
     }
   }
 }
