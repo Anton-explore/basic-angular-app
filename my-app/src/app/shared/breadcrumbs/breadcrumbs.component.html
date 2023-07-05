@@ -1,1 +1,19 @@
-<p class="app-breadcrumbs-list">Courses</p>
+<!-- <div class="app-breadcrumbs-list">
+  <a [routerLink]="coursesLink" class="app-breadcrumbs-links">Courses</a>
+  <span class="app-breadcrumbs-link">/</span>
+  <span class="app-breadcrumbs-link">{{ courseTitle }}</span>
+</div> -->
+<!-- <ol class="app-breadcrumbs-list">
+  <li *ngFor="let breadcrumb of breadcrumbs">
+    <span [routerLink]="breadcrumb.url">
+      {{ breadcrumb.label }}
+    </span>
+  </li>
+</ol> -->
+<ol class="app-breadcrumbs-list">
+  <li *ngFor="let breadcrumb of breadcrumbs">
+    <span [routerLink]="breadcrumb.url" routerLinkActive="router-link-active">
+      {{ breadcrumb.label }}
+    </span>
+  </li>
+</ol>

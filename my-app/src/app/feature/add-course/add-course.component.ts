@@ -1,4 +1,8 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { CoursesService } from 'src/app/shared/services/courses.service';
+import { CourseType } from 'src/app/utils/datatypes';
 import { MOCKED_AUTHORS } from 'src/app/utils/mock-items';
 
 @Component({
@@ -6,7 +10,11 @@ import { MOCKED_AUTHORS } from 'src/app/utils/mock-items';
   templateUrl: './add-course.component.html',
   styleUrls: ['./add-course.component.css'],
 })
-export class AddCourseComponent {
+export class AddCourseComponent implements OnInit {
+  isEdit = false;
+  courseId: string | null = null;
+  course?: CourseType;
+
   courseName!: string;
   courseDescription!: string;
   releaseDate!: string;
@@ -14,6 +22,20 @@ export class AddCourseComponent {
   authors = MOCKED_AUTHORS.slice();
   courseAuthors: string[] = [];
   @Output() cancelAddition: EventEmitter<void> = new EventEmitter<void>();
+
+  constructor(
+    private coursesService: CoursesService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.courseId = this.route.snapshot.params['id'];
+    this.isEdit = !!this.courseId;
+    if (this.courseId) {
+      this.course = this.coursesService.getCourseById(+this.courseId);
+    }
+  }
 
   setDuration(duration: number) {
     this.duration = duration;
@@ -32,10 +54,32 @@ export class AddCourseComponent {
   }
 
   onSaving() {
+    if (this.isEdit && this.course) {
+      const updatedCourse: CourseType = {
+        ...this.course,
+        id: this.course.id,
+        name: this.courseName,
+        description: this.courseDescription,
+        length: this.duration,
+        date: this.releaseDate,
+      };
+      this.coursesService.updateCourse(updatedCourse);
+    } else {
+      this.coursesService.createCourse({
+        id: Math.floor(Math.random() * 100000000),
+        name: this.courseName,
+        description: this.courseDescription,
+        length: this.duration,
+        date: this.releaseDate,
+        // authors: this.courseAuthors,
+      });
+    }
     console.log('Saving course...');
+    this.router.navigate(['courses']);
   }
   onCanceling() {
     this.cancelAddition.emit();
     console.log('Canceling...');
+    this.router.navigate(['courses']);
   }
 }

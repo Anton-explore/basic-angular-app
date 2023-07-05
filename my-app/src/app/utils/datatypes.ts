@@ -27,3 +27,8 @@ export interface ModalContentType {
 export interface ItemContext<T> {
   $implicit: T;
 }
+
+export interface BreadCrumb {
+  label: string;
+  url: string;
+}

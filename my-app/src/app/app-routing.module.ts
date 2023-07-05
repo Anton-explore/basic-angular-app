@@ -5,12 +5,13 @@ import { LoginComponent } from './feature/login/login.component';
 import { AddCourseComponent } from './feature/add-course/add-course.component';
 import { CoursesListComponent } from './feature/courses-list/courses-list.component';
 import { AuthGuard } from './feature/auth.guard';
+import { NotFoundComponent } from './shared/not-found/not-found.component';
 
 const routes: Routes = [
   // { path: 'home', component: MainSectionComponent },
   { path: 'login', component: LoginComponent },
   {
-    path: '/courses/new',
+    path: 'courses/new',
     component: AddCourseComponent,
     canActivate: [AuthGuard],
   },
@@ -18,14 +19,31 @@ const routes: Routes = [
     path: 'courses',
     component: CoursesListComponent,
     canActivate: [AuthGuard],
+    data: {
+      breadcrumb: 'Courses',
+    },
+    children: [
+      {
+        path: ':id',
+        component: AddCourseComponent,
+        canActivate: [AuthGuard],
+        data: {
+          breadcrumb: 'Edit course',
+        },
+      },
+      {
+        path: 'new',
+        component: AddCourseComponent,
+        canActivate: [AuthGuard],
+        data: {
+          breadcrumb: 'New',
+        },
+      },
+    ],
   },
-  { path: '', redirectTo: 'courses', pathMatch: 'full' },
-  {
-    path: '/courses:id',
-    component: AddCourseComponent,
-    canActivate: [AuthGuard],
-  },
-  { path: '**', redirectTo: '/404' },
+  { path: '', redirectTo: '/courses', pathMatch: 'full' },
+  { path: 'not-found', component: NotFoundComponent },
+  { path: '**', redirectTo: '/not-found' },
 ];
 
 @NgModule({

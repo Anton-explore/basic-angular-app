@@ -1,4 +1,5 @@
 import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   faArrowRightFromBracket,
   faArrowRightToBracket,
@@ -24,7 +25,8 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -43,7 +45,10 @@ export class HeaderComponent implements OnInit {
   logOut(): void {
     this.authService.logout();
     this.isAuth = this.authService.isAuthenticated();
-    console.log('Logging off..');
+    if (!this.authService.isAuthenticated()) {
+      this.router.navigate(['login']);
+      console.log('Logging off..');
+    }
     this.updateUserInfo();
   }
 }
