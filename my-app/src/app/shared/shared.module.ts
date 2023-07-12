@@ -24,7 +24,7 @@ import { CourseAuthorsComponent } from './course-addition/course-authors/course-
 import { AddCourseButtonsComponent } from './course-addition/add-course-buttons/add-course-buttons.component';
 import { FormsModule } from '@angular/forms';
 import { NotFoundComponent } from './not-found/not-found.component';
-// import { CustomRouteReuseStrategy } from './custom-route-reuse-strategy/custom-route-reuse-strategy';
+import { CustomRouteReuseStrategy } from './custom-route-reuse-strategy/custom-route-reuse-strategy';
 
 @NgModule({
   declarations: [
@@ -72,8 +72,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     AddCourseButtonsComponent,
     NotFoundComponent,
   ],
-  // providers: [
-  //   { provide: RouteReuseStrategy, useClass: CustomRouteReuseStrategy },
-  // ],
+  providers: [
+    { provide: RouteReuseStrategy, useClass: CustomRouteReuseStrategy },
+  ],
 })
 export class SharedModule {}

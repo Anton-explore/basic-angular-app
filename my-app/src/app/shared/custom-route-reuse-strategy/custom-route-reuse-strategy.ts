@@ -1,38 +1,35 @@
 import {
-  RouteReuseStrategy,
   ActivatedRouteSnapshot,
   DetachedRouteHandle,
+  RouteReuseStrategy,
 } from '@angular/router';
-import { MainSectionComponent } from 'src/app/core/main-section/main-section.component';
 
 export class CustomRouteReuseStrategy implements RouteReuseStrategy {
-  private routeCache = new Map<string, DetachedRouteHandle>();
+  private handlers: { [key: string]: DetachedRouteHandle } = {};
 
   shouldDetach(route: ActivatedRouteSnapshot): boolean {
-    return route.component === MainSectionComponent;
+    return route.routeConfig?.path === 'courses/:id';
   }
 
-  store(
-    route: ActivatedRouteSnapshot,
-    handle: DetachedRouteHandle | null
-  ): void {
-    if (handle && route.component === MainSectionComponent) {
-      this.routeCache.set(route.routeConfig?.path || '', handle);
-    }
+  store(route: ActivatedRouteSnapshot, handle: DetachedRouteHandle): void {
+    this.handlers['courses'] = handle;
   }
 
   shouldAttach(route: ActivatedRouteSnapshot): boolean {
-    return this.routeCache.has(route.routeConfig?.path || '');
+    return !!this.handlers['courses'];
   }
 
   retrieve(route: ActivatedRouteSnapshot): DetachedRouteHandle | null {
-    return this.routeCache.get(route.routeConfig?.path || '') || null;
+    return this.handlers['courses'] || null;
   }
 
   shouldReuseRoute(
     future: ActivatedRouteSnapshot,
     curr: ActivatedRouteSnapshot
   ): boolean {
-    return future.component === curr.component;
+    return (
+      future.routeConfig === curr.routeConfig &&
+      future.component === curr.component
+    );
   }
 }
