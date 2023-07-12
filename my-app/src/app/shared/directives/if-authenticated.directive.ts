@@ -43,3 +43,39 @@ export class IfAuthenticatedDirective<T> implements OnInit {
     });
   }
 }
+
+// import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
+// import { AuthService } from '../services/auth.service';
+// import { ItemContext } from 'src/app/utils/datatypes';
+
+// @Directive({
+//   selector: '[appIfAuthenticated]',
+// })
+// export class IfAuthenticatedDirective<T> {
+//   private isAuthenticated = false;
+//   private condition = false;
+
+//   constructor(
+//     private templateRef: TemplateRef<ItemContext<T>>,
+//     private viewContainer: ViewContainerRef,
+//     private authService: AuthService
+//   ) {
+//     this.authService.loginEvent.subscribe(() => {
+//       this.isAuthenticated = this.authService.isAuthenticated();
+//       this.handleDisplay();
+//     });
+//   }
+
+//   @Input() set appIfAuthenticated(condition: boolean) {
+//     this.condition = condition;
+//     this.handleDisplay();
+//   }
+
+//   handleDisplay() {
+//     if (this.condition && this.isAuthenticated) {
+//       this.viewContainer.createEmbeddedView(this.templateRef);
+//     } else {
+//       this.viewContainer.clear();
+//     }
+//   }
+// }

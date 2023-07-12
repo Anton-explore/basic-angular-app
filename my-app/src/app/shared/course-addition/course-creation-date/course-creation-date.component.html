@@ -7,6 +7,6 @@
     type="date"
     id="releaseDate"
     placeholder="MM/DD/YYYY"
-    [(ngModel)]="releaseDate"
-    (ngModelChange)="releaseDateChange.emit(releaseDate)" />
+    [value]="getDateValue()"
+    (input)="onDateChange($event)" />
 </div>

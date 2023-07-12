@@ -30,6 +30,12 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.authService.isLoggedIn$.subscribe(isLoggedIn => {
+      if (isLoggedIn) {
+        this.user = this.authService.getUserInfo();
+        this.isAuth = this.authService.isAuthenticated();
+      }
+    });
     this.authService.loginEvent.subscribe(() => {
       this.updateUserInfo();
     });
@@ -45,7 +51,7 @@ export class HeaderComponent implements OnInit {
   logOut(): void {
     this.authService.logout();
     this.isAuth = this.authService.isAuthenticated();
-    if (!this.authService.isAuthenticated()) {
+    if (!this.isAuth) {
       this.router.navigate(['login']);
       console.log('Logging off..');
     }

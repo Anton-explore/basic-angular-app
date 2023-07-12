@@ -30,7 +30,6 @@ export class SearchBarComponent {
 
   onAddingCourse(): void {
     this.addingCourse.emit();
-    // this.router.navigate(['/courses/new']);
     this.router.navigate(['new'], { relativeTo: this.route });
   }
 }

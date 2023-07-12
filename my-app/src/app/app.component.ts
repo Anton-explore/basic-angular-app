@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from './shared/services/auth.service';
+import { UserLoginType } from './utils/datatypes';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +11,9 @@ export class AppComponent {
   title = 'my-app';
 
   constructor(private authService: AuthService) {
-    // @ts-ignore
-    const isAuthenticated: string = this.authService.isAuthenticated();
+    const isAuthenticated: boolean = this.authService.isAuthenticated();
     if (isAuthenticated) {
-      const user: any = { email: 'fake', password: '1234' };
+      const user: UserLoginType = { email: 'fake', password: '1234' };
       this.authService.login(user.email, user.password);
     }
   }

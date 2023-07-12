@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { ConfirmationModalComponent } from 'src/app/shared/confirmation-modal/confirmation-modal.component';
 import { CoursesService } from 'src/app/shared/services/courses.service';
@@ -24,8 +24,7 @@ export class CoursesListComponent implements OnInit {
   constructor(
     private coursesService: CoursesService,
     private dialog: MatDialog,
-    private router: Router,
-    private route: ActivatedRoute
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -53,9 +52,7 @@ export class CoursesListComponent implements OnInit {
   }
 
   onCourseEdited(courseId: number): void {
-    // this.router.navigate(['/courses', courseId]);
-    this.router.navigate([courseId], { relativeTo: this.route });
-    console.log('You want edit course with ID: ' + courseId);
+    this.router.navigate(['/courses', courseId]);
   }
 
   onCourseDeleted(courseId: number): void {

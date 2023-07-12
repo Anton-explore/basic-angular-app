@@ -1,5 +1,5 @@
 <div class="app-add-course-wrapper">
-  <h2>{{ isEdit ? 'Edit Course' : 'New Course' }}</h2>
+  <h2>{{ course ? 'Edit Course' : 'New Course' }}</h2>
   <app-course-title
     [(courseName)]="course?.name ?? courseName"
     (courseNameChange)="setTitle($event)"></app-course-title>
@@ -7,7 +7,7 @@
     [(courseDescription)]="course?.description ?? courseDescription"
     (courseDescriptionChange)="setDescr($event)"></app-course-description>
   <app-course-creation-date
-    [(releaseDate)]="course?.date ?? releaseDate"
+    [(releaseDate)]="releaseDate"
     (releaseDateChange)="setDate($event)"></app-course-creation-date>
   <app-course-duration
     [(duration)]="course?.length ?? duration"

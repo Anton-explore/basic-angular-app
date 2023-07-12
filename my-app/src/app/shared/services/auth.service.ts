@@ -1,6 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { User } from 'src/app/utils/datatypes';
-import { BehaviorSubject, Observable } from "rxjs";
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -9,8 +9,10 @@ export class AuthService {
   private readonly USER_KEY = 'user';
   private readonly TOKEN_KEY = 'token';
   public loginEvent: EventEmitter<void> = new EventEmitter<void>();
-  private isLoggedInSource: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  public isLoggedIn$: Observable<boolean> = this.isLoggedInSource.asObservable();
+  private isLoggedInSource: BehaviorSubject<boolean> =
+    new BehaviorSubject<boolean>(false);
+  public isLoggedIn$: Observable<boolean> =
+    this.isLoggedInSource.asObservable();
 
   login(email: string, password?: string): void {
     const user: User = {
