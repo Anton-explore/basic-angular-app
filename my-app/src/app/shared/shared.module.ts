@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule, RouteReuseStrategy } from '@angular/router';
 
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
@@ -22,6 +23,8 @@ import { CourseDurationComponent } from './course-addition/course-duration/cours
 import { CourseAuthorsComponent } from './course-addition/course-authors/course-authors.component';
 import { AddCourseButtonsComponent } from './course-addition/add-course-buttons/add-course-buttons.component';
 import { FormsModule } from '@angular/forms';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { CustomRouteReuseStrategy } from './custom-route-reuse-strategy/custom-route-reuse-strategy';
 
 @NgModule({
   declarations: [
@@ -40,6 +43,7 @@ import { FormsModule } from '@angular/forms';
     CourseDurationComponent,
     CourseAuthorsComponent,
     AddCourseButtonsComponent,
+    NotFoundComponent,
   ],
   imports: [
     CommonModule,
@@ -48,6 +52,7 @@ import { FormsModule } from '@angular/forms';
     MatSelectModule,
     MatFormFieldModule,
     FormsModule,
+    RouterModule,
   ],
   exports: [
     LogoComponent,
@@ -65,6 +70,10 @@ import { FormsModule } from '@angular/forms';
     CourseDurationComponent,
     CourseAuthorsComponent,
     AddCourseButtonsComponent,
+    NotFoundComponent,
+  ],
+  providers: [
+    { provide: RouteReuseStrategy, useClass: CustomRouteReuseStrategy },
   ],
 })
 export class SharedModule {}

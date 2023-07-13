@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 import { BUTTONS_TEXT, INPUTS_TEXT } from 'src/app/utils/mock-items';
 
@@ -16,6 +17,8 @@ export class SearchBarComponent {
   @Output() searchStarts: EventEmitter<string> = new EventEmitter<string>();
   @Output() addingCourse: EventEmitter<void> = new EventEmitter<void>();
 
+  constructor(private router: Router, private route: ActivatedRoute) {}
+
   onSearch(): void {
     this.searchStarts.emit(this.inputValue);
   }
@@ -27,5 +30,6 @@ export class SearchBarComponent {
 
   onAddingCourse(): void {
     this.addingCourse.emit();
+    this.router.navigate(['new'], { relativeTo: this.route });
   }
 }

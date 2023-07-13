@@ -17,7 +17,17 @@ export class CourseCreationDateComponent {
   @Output() releaseDateChange: EventEmitter<string> =
     new EventEmitter<string>();
 
-  // onChange() {
-  //   this.inputChange.emit(this.releaseDate);
-  // }
+  getDateValue(): string {
+    if (this.releaseDate) {
+      return new Date(this.releaseDate).toISOString().split('T')[0];
+    }
+    return '';
+  }
+
+  onDateChange(event: Event) {
+    const element = event.target as HTMLInputElement;
+    const selectedDate = element.value;
+    this.releaseDate = selectedDate;
+    this.releaseDateChange.emit(selectedDate);
+  }
 }
