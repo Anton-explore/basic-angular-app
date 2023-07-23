@@ -2,11 +2,11 @@
   <app-search-bar
     (searchStarts)="applyFilter($event)"
     (addingCourse)="courseAddition.emit()"></app-search-bar>
-  <ng-container *ngIf="filteredCourses.length; else emptyList">
+  <ng-container *ngIf="courses.length; else emptyList">
     <ul class="app-courses-list">
       <app-course-card
         *ngFor="
-          let course of filteredCourses
+          let course of courses
             | filter : searchText
             | orderBy : orderedBy : searchText;
           trackBy: trackCourseById
@@ -23,9 +23,7 @@
   </ng-template>
   <div class="app-load-more-wrapper">
     <button class="app-button__load-more" (click)="onLoadingMore()">
-      <a href="#">
-        {{ loadMoreText }}
-      </a>
+      <span class="app-link-text">{{ loadMoreText }}</span>
     </button>
   </div>
 </section>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 // import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
-import { BreadCrumb } from '../../utils/datatypes';
+import { BreadCrumb, CourseType } from '../../utils/datatypes';
 import { CoursesService } from '../services/courses.service';
 
 @Component({
@@ -34,14 +34,16 @@ export class BreadcrumbsComponent implements OnInit {
 
     const breadcrumbs: BreadCrumb[] = [];
 
-    const lastPath = window.location.pathname.split('/').pop();
+    const lastPath = path.split('/').pop();
     const courseId = Number(lastPath);
 
     if (courseId) {
-      const course = this.coursesService.getCourseById(+courseId);
-      if (course) {
-        courseTitle = course.name;
-      }
+      this.coursesService.getCourseById(+courseId);
+      this.coursesService.course$.subscribe((courseData: CourseType | null) => {
+        if (courseData) {
+          courseTitle = courseData.name;
+        }
+      });
     }
 
     let url = '';

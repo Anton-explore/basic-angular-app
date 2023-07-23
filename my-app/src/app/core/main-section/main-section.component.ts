@@ -12,11 +12,9 @@ export class MainSectionComponent implements OnInit {
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
+    // this.isAuthorize = this.authService.isAuthenticated();
     this.authService.isLoggedIn$.subscribe((isAuth: boolean) => {
       this.isAuthorize = isAuth;
     });
-    // this.authService.loginEvent.subscribe(() => {
-    // this.isAuthorize = this.authService.isAuthenticated();
-    // });
   }
 }

@@ -1,6 +1,9 @@
-import { Injectable, EventEmitter } from '@angular/core';
-import { User } from 'src/app/utils/datatypes';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
+
+import { User, UserLoginType } from 'src/app/utils/datatypes';
 
 @Injectable({
   providedIn: 'root',
@@ -8,47 +11,67 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class AuthService {
   private readonly USER_KEY = 'user';
   private readonly TOKEN_KEY = 'token';
-  public loginEvent: EventEmitter<void> = new EventEmitter<void>();
-  private isLoggedInSource: BehaviorSubject<boolean> =
-    new BehaviorSubject<boolean>(false);
-  public isLoggedIn$: Observable<boolean> =
-    this.isLoggedInSource.asObservable();
+  private token: null | string = localStorage.getItem(this.TOKEN_KEY);
 
-  login(email: string, password?: string): void {
-    const user: User = {
-      email,
-      firstName: 'TestUser',
-      lastName: 'TestSurname',
-      id: '12345',
-    };
-    const token = 'some_fake_token' + email;
-    const pass = '1234';
+  // public loginEvent: EventEmitter<void> = new EventEmitter<void>();
+  // private isLoggedInSource: BehaviorSubject<boolean> =
+  //   new BehaviorSubject<boolean>(false);
+  // public isLoggedIn$: Observable<boolean> =
+  //   this.isLoggedInSource.asObservable();
+  public isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    !!this.token
+  );
+  private userSource: BehaviorSubject<User | null> =
+    new BehaviorSubject<User | null>(null);
+  public user$ = this.userSource.asObservable();
 
-    if (password === pass) {
-      this.isLoggedInSource.next(true);
-      localStorage.setItem(this.USER_KEY, JSON.stringify(user));
-      localStorage.setItem(this.TOKEN_KEY, token);
-      this.loginEvent.emit();
+  constructor(private http: HttpClient, private router: Router) {
+    if (this.isAuthenticated()) {
+      this.getUserInfo();
     }
+  }
+
+  login(login: string, password: string): void {
+    const loggedData = {
+      login,
+      password,
+    };
+
+    this.http
+      .post<UserLoginType>('http://localhost:3004/auth/login', loggedData)
+      .subscribe(data => {
+        if (data.token) {
+          this.isLoggedIn$.next(!!data.token);
+          localStorage.setItem(this.TOKEN_KEY, data.token);
+          this.getUserInfo();
+          this.router.navigate(['/courses']);
+        }
+      });
   }
 
   logout(): void {
-    localStorage.removeItem(this.USER_KEY);
     localStorage.removeItem(this.TOKEN_KEY);
-    this.loginEvent.emit();
+    this.token = null;
+    this.isLoggedIn$.next(!!this.token);
+    localStorage.removeItem(this.USER_KEY);
   }
 
   isAuthenticated(): boolean {
-    return !!localStorage.getItem(this.TOKEN_KEY);
+    this.token = localStorage.getItem(this.TOKEN_KEY);
+    return !!this.token;
   }
 
-  getUserInfo(): User | null {
-    const user = localStorage.getItem(this.USER_KEY);
-
-    if (user) {
-      return JSON.parse(user);
-    }
-
-    return null;
+  getUserInfo(): void {
+    const userToken = localStorage.getItem(this.TOKEN_KEY);
+    this.http
+      .post<User | null>('http://localhost:3004/auth/userinfo', {
+        token: userToken,
+      })
+      .subscribe(data => {
+        if (data) {
+          localStorage.setItem(this.USER_KEY, JSON.stringify(data));
+        }
+        this.userSource.next(data);
+      });
   }
 }

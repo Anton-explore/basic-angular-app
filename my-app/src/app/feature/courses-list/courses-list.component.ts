@@ -15,9 +15,10 @@ import { BUTTONS_TEXT } from 'src/app/utils/mock-items';
 export class CoursesListComponent implements OnInit {
   searchText!: string;
   courses: CourseType[] = [];
+  private currentPage = 1;
   loadMoreText = BUTTONS_TEXT.MORE;
 
-  filteredCourses: CourseType[] = [];
+  // filteredCourses: CourseType[] = [];
   orderedBy: 'asc' | 'desc' = 'asc';
   @Output() courseAddition: EventEmitter<void> = new EventEmitter<void>();
 
@@ -29,12 +30,12 @@ export class CoursesListComponent implements OnInit {
 
   ngOnInit() {
     this.getCourses();
-    this.filteredCourses = this.courses;
+    // this.filteredCourses = this.courses;
   }
 
   getCourses(): void {
-    this.courses = this.coursesService.getCourses();
-    this.coursesService.coursesListChange.subscribe((courses: CourseType[]) => {
+    this.coursesService.getList(1, 5);
+    this.coursesService.courses$.subscribe(courses => {
       this.courses = courses;
     });
   }
@@ -44,6 +45,8 @@ export class CoursesListComponent implements OnInit {
   }
 
   onLoadingMore() {
+    this.currentPage = this.currentPage + 1;
+    this.coursesService.getList(this.currentPage, 5, this.searchText);
     console.log('Loading moore..');
   }
 
@@ -69,8 +72,7 @@ export class CoursesListComponent implements OnInit {
       if (result) {
         this.coursesService.removeCourse(courseId);
         this.getCourses();
-        this.filteredCourses = this.courses;
-        console.log(`You delete ${courseName} course with ID: ${courseId}`);
+        // this.filteredCourses = this.courses;
       }
     });
   }

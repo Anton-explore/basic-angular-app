@@ -1,4 +1,5 @@
 .app-courses-page {
+  width: 100%;
   max-width: 1100px;
   height: fit-content;
   /* height: fit-content;
@@ -30,10 +31,21 @@
   background-color: transparent;
   border: none;
 }
+.app-link-text {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  color: blue;
+  font-weight: 400;
+}
 
 @media (max-width: 1000px) {
   .app-courses-page {
     height: fit-content;
     padding-bottom: 40px;
+  }
+}
+@media (min-width: 1101px) {
+  .app-courses-page {
+    margin: 0 auto;
   }
 }

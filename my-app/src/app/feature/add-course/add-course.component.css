@@ -19,3 +19,8 @@
     width: 100vw;
   }
 }
+@media (min-width: 801px) {
+  .app-add-course-wrapper {
+    margin: 0 auto;
+  }
+}
