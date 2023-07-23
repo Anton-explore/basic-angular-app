@@ -42,6 +42,7 @@ export class CoursesListComponent implements OnInit {
 
   applyFilter(searchText: string) {
     this.searchText = searchText;
+    this.coursesService.getList(this.currentPage, 5, this.searchText);
   }
 
   onLoadingMore() {

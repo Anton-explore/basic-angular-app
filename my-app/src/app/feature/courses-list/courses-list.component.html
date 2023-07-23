@@ -6,9 +6,7 @@
     <ul class="app-courses-list">
       <app-course-card
         *ngFor="
-          let course of courses
-            | filter : searchText
-            | orderBy : orderedBy : searchText;
+          let course of courses | orderBy : orderedBy : searchText;
           trackBy: trackCourseById
         "
         [course]="course"
