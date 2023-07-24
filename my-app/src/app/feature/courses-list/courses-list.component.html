@@ -19,9 +19,11 @@
       <p>No data. Feel free to add new course</p>
     </div>
   </ng-template>
-  <div class="app-load-more-wrapper">
-    <button class="app-button__load-more" (click)="onLoadingMore()">
-      <span class="app-link-text">{{ loadMoreText }}</span>
-    </button>
-  </div>
+  <ng-container *ngIf="courses.length > 3">
+    <div class="app-load-more-wrapper">
+      <button class="app-button__load-more" (click)="onLoadingMore()">
+        <span class="app-link-text">{{ loadMoreText }}</span>
+      </button>
+    </div>
+  </ng-container>
 </section>

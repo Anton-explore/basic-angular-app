@@ -14,9 +14,6 @@ export class IfAuthenticatedDirective<T> {
     private templateRef: TemplateRef<ItemContext<T>>,
     private viewContainer: ViewContainerRef
   ) {
-    // const token = localStorage.getItem('token');
-    // this.isLoggedIn = !!token;
-    // this.checkDisplay();
     this.authService.isLoggedIn$.subscribe(isLoggedIn => {
       this.isLoggedIn = isLoggedIn;
       this.checkDisplay();
@@ -35,18 +32,4 @@ export class IfAuthenticatedDirective<T> {
       this.viewContainer.clear();
     }
   }
-
-  // ngOnInit() {
-  //   this.authService.loginEvent.subscribe(() => {
-  //     const isAuthenticated = this.authService.isAuthenticated();
-
-  //     if (isAuthenticated && !this.hasView) {
-  //       this.viewContainer.createEmbeddedView(this.templateRef);
-  //       this.hasView = true;
-  //     } else if (!isAuthenticated && this.hasView) {
-  //       this.viewContainer.clear();
-  //       this.hasView = false;
-  //     }
-  //   });
-  // }
 }

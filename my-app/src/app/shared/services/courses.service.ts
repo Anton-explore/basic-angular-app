@@ -3,7 +3,6 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 import { AuthorType, CourseType } from 'src/app/utils/datatypes';
-// import { COURSES } from 'src/app/utils/mock-items';
 
 @Injectable({
   providedIn: 'root',

@@ -12,12 +12,6 @@ export class AuthService {
   private readonly USER_KEY = 'user';
   private readonly TOKEN_KEY = 'token';
   private token: null | string = localStorage.getItem(this.TOKEN_KEY);
-
-  // public loginEvent: EventEmitter<void> = new EventEmitter<void>();
-  // private isLoggedInSource: BehaviorSubject<boolean> =
-  //   new BehaviorSubject<boolean>(false);
-  // public isLoggedIn$: Observable<boolean> =
-  //   this.isLoggedInSource.asObservable();
   public isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     !!this.token
   );

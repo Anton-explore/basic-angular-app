@@ -18,7 +18,6 @@ export class CoursesListComponent implements OnInit {
   private currentPage = 1;
   loadMoreText = BUTTONS_TEXT.MORE;
 
-  // filteredCourses: CourseType[] = [];
   orderedBy: 'asc' | 'desc' = 'asc';
   @Output() courseAddition: EventEmitter<void> = new EventEmitter<void>();
 
@@ -30,7 +29,6 @@ export class CoursesListComponent implements OnInit {
 
   ngOnInit() {
     this.getCourses();
-    // this.filteredCourses = this.courses;
   }
 
   getCourses(): void {
@@ -73,7 +71,6 @@ export class CoursesListComponent implements OnInit {
       if (result) {
         this.coursesService.removeCourse(courseId);
         this.getCourses();
-        // this.filteredCourses = this.courses;
       }
     });
   }

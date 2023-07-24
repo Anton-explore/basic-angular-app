@@ -1,13 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 
 import { AuthInterceptor } from './auth-interceptor.service';
-// import { AuthService } from './auth.service';
 import { HttpRequest } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of } from 'rxjs';
 
 describe('AuthInterceptorInterceptor', () => {
-  // let authService: AuthService;
   let interceptor: AuthInterceptor;
 
   beforeEach(() =>
@@ -18,7 +16,6 @@ describe('AuthInterceptorInterceptor', () => {
   );
 
   beforeEach(() => {
-    // authService = TestBed.inject(AuthService);
     interceptor = TestBed.inject(AuthInterceptor);
   });
 

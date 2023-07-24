@@ -16,17 +16,6 @@ export class LoginComponent {
   login() {
     if (this.email.trim() && this.password.trim()) {
       this.authService.login(this.email.trim(), this.password.trim());
-      // .subscribe(() => {
-      //   this.router.navigate(['/courses']);
-      // });
-      // this.authService.isLoggedIn$.subscribe(isLoggedIn => {
-      //   if (isLoggedIn) {
-      //     this.router.navigate(['/courses']);
-      //   }
-      // });
     }
-    // if (this.authService.isAuthenticated()) {
-
-    // }
   }
 }
