@@ -15,8 +15,5 @@ export class MainSectionComponent implements OnInit {
     this.authService.isLoggedIn$.subscribe((isAuth: boolean) => {
       this.isAuthorize = isAuth;
     });
-    // this.authService.loginEvent.subscribe(() => {
-    // this.isAuthorize = this.authService.isAuthenticated();
-    // });
   }
 }

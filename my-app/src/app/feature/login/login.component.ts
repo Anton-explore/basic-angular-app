@@ -16,9 +16,6 @@ export class LoginComponent {
   login() {
     if (this.email.trim() && this.password.trim()) {
       this.authService.login(this.email.trim(), this.password.trim());
-      if (this.authService.isAuthenticated()) {
-        this.router.navigate(['/courses']);
-      }
     }
   }
 }

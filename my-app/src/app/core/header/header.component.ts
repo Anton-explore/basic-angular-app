@@ -1,10 +1,11 @@
-import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   faArrowRightFromBracket,
   faArrowRightToBracket,
   faCircleUser,
 } from '@fortawesome/free-solid-svg-icons';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { User } from 'src/app/utils/datatypes';
 
@@ -15,13 +16,13 @@ import { BUTTONS_TEXT } from 'src/app/utils/mock-items';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   buttonText: string = BUTTONS_TEXT.OUT;
-  isAuth = false;
   user: User | null = null;
   loginIcon = faArrowRightToBracket;
   logoutIcon = faArrowRightFromBracket;
   userIcon = faCircleUser;
+  private userSubscr!: Subscription;
 
   constructor(
     private authService: AuthService,
@@ -30,31 +31,18 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.authService.isLoggedIn$.subscribe(isLoggedIn => {
-      if (isLoggedIn) {
-        this.user = this.authService.getUserInfo();
-        this.isAuth = this.authService.isAuthenticated();
-      }
-    });
-    this.authService.loginEvent.subscribe(() => {
-      this.updateUserInfo();
+    this.userSubscr = this.authService.user$.subscribe(user => {
+      this.user = user;
     });
   }
 
-  updateUserInfo() {
-    this.isAuth = this.authService.isAuthenticated();
-    if (this.isAuth) {
-      this.user = this.authService.getUserInfo();
-    }
+  ngOnDestroy(): void {
+    this.userSubscr.unsubscribe();
   }
 
   logOut(): void {
     this.authService.logout();
-    this.isAuth = this.authService.isAuthenticated();
-    if (!this.isAuth) {
-      this.router.navigate(['login']);
-      console.log('Logging off..');
-    }
-    this.updateUserInfo();
+    this.user = null;
+    this.router.navigate(['/login']);
   }
 }

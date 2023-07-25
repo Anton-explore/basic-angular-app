@@ -1,4 +1,4 @@
-import { CourseType } from './datatypes';
+import { CourseType, User } from './datatypes';
 
 export const COURSES: CourseType[] = [
   {
@@ -242,3 +242,14 @@ export const filteredCourses: CourseType[] = [
     isTopRated: false,
   },
 ];
+
+export const mockedUser: User = {
+  id: 12345,
+  token: 'myBestTokenEver',
+  name: {
+    first: 'Scratch',
+    last: 'Squirrel',
+  },
+  login: 'login',
+  password: 'password',
+};

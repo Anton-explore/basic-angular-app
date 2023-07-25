@@ -33,15 +33,18 @@ export class AddCourseComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.courseId = Number(params.get('id'));
       if (this.courseId) {
-        this.course = this.coursesService.getCourseById(+this.courseId);
-      }
-      if (this.course) {
-        this.courseName = this.course.name;
-        this.courseDescription = this.course.description;
-        // this.releaseDate = new Date(this.course.date);
-        this.releaseDate = this.course.date;
-        this.duration = this.course.length;
-        // this.courseAuthors = this.course.authors;
+        this.coursesService.getCourseById(this.courseId);
+        this.coursesService.course$.subscribe(
+          (courseData: CourseType | null) => {
+            if (courseData) {
+              // this.courseAuthors = courseData.authors.map(author => author.name).join(', ');
+              this.courseName = courseData.name;
+              this.courseDescription = courseData.description;
+              this.releaseDate = courseData.date;
+              this.duration = courseData.length;
+            }
+          }
+        );
       }
     });
   }

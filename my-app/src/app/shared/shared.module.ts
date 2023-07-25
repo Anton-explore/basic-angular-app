@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, RouteReuseStrategy } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
@@ -53,6 +54,7 @@ import { CustomRouteReuseStrategy } from './custom-route-reuse-strategy/custom-r
     MatFormFieldModule,
     FormsModule,
     RouterModule,
+    HttpClientModule,
   ],
   exports: [
     LogoComponent,

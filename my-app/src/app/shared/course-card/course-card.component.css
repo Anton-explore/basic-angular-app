@@ -1,5 +1,7 @@
 .app-courses-card {
   display: flex;
+  justify-content: space-between;
+  gap: 6px;
   border-radius: 6px;
   background-color: #ffff;
   padding: 24px;
