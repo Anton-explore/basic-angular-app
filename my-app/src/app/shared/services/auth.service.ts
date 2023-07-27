@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 import { User, UserLoginType } from 'src/app/utils/datatypes';
@@ -33,11 +34,17 @@ export class AuthService {
 
     this.http
       .post<UserLoginType>('http://localhost:3004/auth/login', loggedData)
+      .pipe(
+        tap(data => {
+          if (data.token) {
+            this.isLoggedIn$.next(!!data.token);
+            localStorage.setItem(this.TOKEN_KEY, data.token);
+            this.getUserInfo();
+          }
+        })
+      )
       .subscribe(data => {
-        if (data.token) {
-          this.isLoggedIn$.next(!!data.token);
-          localStorage.setItem(this.TOKEN_KEY, data.token);
-          this.getUserInfo();
+        if (data) {
           this.router.navigate(['/courses']);
         }
       });

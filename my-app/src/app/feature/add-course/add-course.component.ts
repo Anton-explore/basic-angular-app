@@ -37,6 +37,7 @@ export class AddCourseComponent implements OnInit {
         this.coursesService.course$.subscribe(
           (courseData: CourseType | null) => {
             if (courseData) {
+              this.course = courseData;
               // this.courseAuthors = courseData.authors.map(author => author.name).join(', ');
               this.courseName = courseData.name;
               this.courseDescription = courseData.description;
