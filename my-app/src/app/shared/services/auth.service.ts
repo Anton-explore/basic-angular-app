@@ -20,6 +20,8 @@ export class AuthService {
     new BehaviorSubject<User | null>(null);
   public user$ = this.userSource.asObservable();
 
+  isAuthenticated$ = new BehaviorSubject<boolean>(!!this.token);
+
   constructor(private http: HttpClient, private router: Router) {
     if (this.isAuthenticated()) {
       this.getUserInfo();

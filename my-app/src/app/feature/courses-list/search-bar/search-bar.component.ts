@@ -1,5 +1,8 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
+
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 import { BUTTONS_TEXT, INPUTS_TEXT } from 'src/app/utils/mock-items';
 
@@ -8,7 +11,7 @@ import { BUTTONS_TEXT, INPUTS_TEXT } from 'src/app/utils/mock-items';
   templateUrl: './search-bar.component.html',
   styleUrls: ['./search-bar.component.css'],
 })
-export class SearchBarComponent {
+export class SearchBarComponent implements OnInit {
   placeholder: string = INPUTS_TEXT.SRCH;
   addText: string = BUTTONS_TEXT.ADD;
   searchText: string = BUTTONS_TEXT.SRCH;
@@ -17,13 +20,22 @@ export class SearchBarComponent {
   @Output() searchStarts: EventEmitter<string> = new EventEmitter<string>();
   @Output() addingCourse: EventEmitter<void> = new EventEmitter<void>();
 
+  private inputValueChanges: Subject<string> = new Subject<string>();
+
   constructor(private router: Router, private route: ActivatedRoute) {}
 
-  onSearch(): void {
-    this.searchStarts.emit(this.inputValue);
+  ngOnInit(): void {
+    this.inputValueChanges
+      .pipe(debounceTime(500))
+      .subscribe(value => this.onSearch(value));
   }
-  clearInput() {
-    if (this.inputValue === '') {
+
+  onSearchInput(): void {
+    this.inputValueChanges.next(this.inputValue);
+  }
+
+  onSearch(value: string): void {
+    if (value.length >= 3 || !value.length) {
       this.searchStarts.emit(this.inputValue);
     }
   }

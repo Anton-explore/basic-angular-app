@@ -7,7 +7,10 @@ import { AuthGuard } from './feature/auth.guard';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
   {
     path: 'courses',
     canActivate: [AuthGuard],
@@ -26,7 +29,6 @@ const routes: Routes = [
       },
     ],
   },
-  { path: '', redirectTo: '/courses', pathMatch: 'full' },
   {
     path: 'not-found',
     component: NotFoundComponent,
@@ -35,6 +37,7 @@ const routes: Routes = [
       breadcrumb: 'Page not found!',
     },
   },
+  { path: '', redirectTo: '/courses', pathMatch: 'full' },
   { path: '**', redirectTo: '/not-found' },
 ];
 

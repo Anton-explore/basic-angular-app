@@ -6,7 +6,7 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 import { AuthService } from '../shared/services/auth.service';
 
@@ -24,11 +24,21 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (this.auth.isAuthenticated()) {
-      return true;
-    } else {
-      this.router.navigate(['/login']);
-      return false;
-    }
+    return this.auth.isAuthenticated$.pipe(
+      map(isAuthenticated => {
+        if (isAuthenticated) {
+          return true;
+        } else {
+          this.router.navigate(['/login']);
+          return false;
+        }
+      })
+    );
+    // if (this.auth.isAuthenticated()) {
+    //   return true;
+    // } else {
+    //   this.router.navigate(['/login']);
+    //   return false;
+    // }
   }
 }
