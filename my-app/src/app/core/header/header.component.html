@@ -3,7 +3,7 @@
   <div class="app-header__block" *appIfAuthenticated="true">
     <p class="app-username-wrapper">
       <fa-icon [icon]="userIcon"></fa-icon>
-      {{ user?.name?.first }} login
+      {{ (user$ | async)?.name?.first }} login
     </p>
     <button class="app-button__logging" (click)="logOut()">
       <fa-icon [icon]="logoutIcon"></fa-icon>

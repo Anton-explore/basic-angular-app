@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { LogoComponent } from './logo/logo.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
@@ -26,6 +27,7 @@ import { AddCourseButtonsComponent } from './course-addition/add-course-buttons/
 import { FormsModule } from '@angular/forms';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { CustomRouteReuseStrategy } from './custom-route-reuse-strategy/custom-route-reuse-strategy';
+import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,7 @@ import { CustomRouteReuseStrategy } from './custom-route-reuse-strategy/custom-r
     CourseAuthorsComponent,
     AddCourseButtonsComponent,
     NotFoundComponent,
+    LoaderComponent,
   ],
   imports: [
     CommonModule,
@@ -52,6 +55,7 @@ import { CustomRouteReuseStrategy } from './custom-route-reuse-strategy/custom-r
     MatDialogModule,
     MatSelectModule,
     MatFormFieldModule,
+    MatProgressSpinnerModule,
     FormsModule,
     RouterModule,
     HttpClientModule,
@@ -73,6 +77,7 @@ import { CustomRouteReuseStrategy } from './custom-route-reuse-strategy/custom-r
     CourseAuthorsComponent,
     AddCourseButtonsComponent,
     NotFoundComponent,
+    LoaderComponent,
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: CustomRouteReuseStrategy },

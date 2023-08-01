@@ -1,11 +1,11 @@
-import { Component, ChangeDetectorRef, OnInit, OnDestroy } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   faArrowRightFromBracket,
   faArrowRightToBracket,
   faCircleUser,
 } from '@fortawesome/free-solid-svg-icons';
-import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { User } from 'src/app/utils/datatypes';
 
@@ -16,13 +16,12 @@ import { BUTTONS_TEXT } from 'src/app/utils/mock-items';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
-export class HeaderComponent implements OnInit, OnDestroy {
+export class HeaderComponent implements OnInit {
   buttonText: string = BUTTONS_TEXT.OUT;
-  user: User | null = null;
   loginIcon = faArrowRightToBracket;
   logoutIcon = faArrowRightFromBracket;
   userIcon = faCircleUser;
-  private userSubscr!: Subscription;
+  user$!: Observable<User | null>;
 
   constructor(
     private authService: AuthService,
@@ -31,18 +30,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.userSubscr = this.authService.user$.subscribe(user => {
-      this.user = user;
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.userSubscr.unsubscribe();
+    this.user$ = this.authService.user$;
   }
 
   logOut(): void {
     this.authService.logout();
-    this.user = null;
     this.router.navigate(['/login']);
   }
 }

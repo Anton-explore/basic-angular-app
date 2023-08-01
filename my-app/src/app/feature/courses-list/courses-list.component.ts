@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 import { ConfirmationModalComponent } from 'src/app/shared/confirmation-modal/confirmation-modal.component';
 import { CoursesService } from 'src/app/shared/services/courses.service';
@@ -18,6 +19,8 @@ export class CoursesListComponent implements OnInit {
   private currentPage = 1;
   loadMoreText = BUTTONS_TEXT.MORE;
 
+  courses$!: Observable<CourseType[] | []>;
+
   orderedBy: 'asc' | 'desc' = 'asc';
   @Output() courseAddition: EventEmitter<void> = new EventEmitter<void>();
 
@@ -28,10 +31,6 @@ export class CoursesListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getCourses();
-  }
-
-  getCourses(): void {
     this.coursesService.getList(1, 5);
     this.coursesService.courses$.subscribe(courses => {
       this.courses = courses;
@@ -70,7 +69,6 @@ export class CoursesListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.coursesService.removeCourse(courseId);
-        this.getCourses();
       }
     });
   }

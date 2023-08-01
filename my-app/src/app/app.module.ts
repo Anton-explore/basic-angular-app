@@ -14,6 +14,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CoursesService } from './shared/services/courses.service';
 import { AuthService } from './shared/services/auth.service';
 import { AuthInterceptor } from './shared/services/auth-interceptor.service';
+import { LoaderInterceptor } from './shared/services/loader-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,11 @@ import { AuthInterceptor } from './shared/services/auth-interceptor.service';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoaderInterceptor,
       multi: true,
     },
   ],

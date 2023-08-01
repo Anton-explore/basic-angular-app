@@ -11,6 +11,8 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { mockedUser } from 'src/app/utils/mock-items';
+import { BehaviorSubject, of } from 'rxjs';
+import { User } from 'src/app/utils/datatypes';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -20,6 +22,13 @@ describe('HeaderComponent', () => {
   let router: Router;
 
   beforeEach(async () => {
+    const authServiceStub: Partial<AuthService> = {
+      user$: new BehaviorSubject<User | null>(null),
+      logout: () => {
+        console.log('Login out');
+      },
+    };
+
     await TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
@@ -29,7 +38,7 @@ describe('HeaderComponent', () => {
         SharedModule,
       ],
       declarations: [HeaderComponent],
-      providers: [AuthService],
+      providers: [{ provide: AuthService, useValue: authServiceStub }],
     }).compileComponents();
 
     fixture = TestBed.createComponent(HeaderComponent);
@@ -53,21 +62,28 @@ describe('HeaderComponent', () => {
   });
 
   it('should initialize properties correctly', () => {
+    component.ngOnInit();
+    fixture.detectChanges();
+
+    expect(component.user$).toBeTruthy();
+    component.user$.subscribe(user => {
+      expect(user).toBeNull();
+    });
     expect(component.buttonText).toEqual('Log out');
-    expect(component.user).toBeNull();
+    // expect(component.user).toBeNull();
   });
 
   it('should get user object when authenticated', () => {
-    authService.isLoggedIn$.next(true);
-    const req = httpTestingController.expectOne({
-      method: 'POST',
-      url: 'http://localhost:3004/auth/userinfo',
-    });
-    req.flush(mockedUser);
+    // authService.isLoggedIn$.next(true);
+    // const req = httpTestingController.expectOne({
+    //   method: 'POST',
+    //   url: 'http://localhost:3004/auth/userinfo',
+    // });
+    // req.flush(mockedUser);
+    authService.user$ = of(mockedUser);
 
-    authService.user$.subscribe(user => {
+    component.user$.subscribe(user => {
       expect(user).toEqual(mockedUser);
-      expect(component.user).toEqual(mockedUser);
     });
   });
 
