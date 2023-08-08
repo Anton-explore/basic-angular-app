@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, EventEmitter } from '@angular/core';
-import { BehaviorSubject, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, Observable, of, switchMap, tap } from 'rxjs';
 
-import { AuthorType, CourseType } from 'src/app/utils/datatypes';
+import { Author, AuthorType, CourseType } from 'src/app/utils/datatypes';
 
 @Injectable({
   providedIn: 'root',
@@ -124,5 +124,19 @@ export class CoursesService {
           this.coursesSubject.next(data || []);
         })
       );
+  }
+
+  getAuthors(): Observable<AuthorType[]> {
+    return this.http.get<Author[]>('http://localhost:3004/authors').pipe(
+      switchMap((authors: Author[]) => {
+        const authorsWithType: AuthorType[] = authors.map(author => {
+          const nameParts = author.name.split(' ');
+          const lastName = nameParts.length > 1 ? nameParts[1] : '';
+          const firstName = nameParts[0];
+          return { ...author, name: firstName, lastName: lastName };
+        });
+        return of(authorsWithType);
+      })
+    );
   }
 }

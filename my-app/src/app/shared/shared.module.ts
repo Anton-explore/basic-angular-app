@@ -2,11 +2,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, RouteReuseStrategy } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
 
 import { LogoComponent } from './logo/logo.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
@@ -24,7 +28,6 @@ import { CourseCreationDateComponent } from './course-addition/course-creation-d
 import { CourseDurationComponent } from './course-addition/course-duration/course-duration.component';
 import { CourseAuthorsComponent } from './course-addition/course-authors/course-authors.component';
 import { AddCourseButtonsComponent } from './course-addition/add-course-buttons/add-course-buttons.component';
-import { FormsModule } from '@angular/forms';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { CustomRouteReuseStrategy } from './custom-route-reuse-strategy/custom-route-reuse-strategy';
 import { LoaderComponent } from './loader/loader.component';
@@ -59,6 +62,10 @@ import { LoaderComponent } from './loader/loader.component';
     FormsModule,
     RouterModule,
     HttpClientModule,
+    MatChipsModule,
+    MatIconModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule,
   ],
   exports: [
     LogoComponent,

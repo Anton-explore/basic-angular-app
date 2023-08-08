@@ -34,6 +34,11 @@ export interface AuthorType {
   lastName?: string;
 }
 
+export interface Author {
+  id: number;
+  name: string;
+}
+
 export interface ModalContentType {
   title: string;
   text: string;

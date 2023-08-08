@@ -2,8 +2,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { CoursesService } from 'src/app/shared/services/courses.service';
-import { CourseType } from 'src/app/utils/datatypes';
-import { MOCKED_AUTHORS } from 'src/app/utils/mock-items';
+import { AuthorType, CourseType } from 'src/app/utils/datatypes';
+// import { MOCKED_AUTHORS } from 'src/app/utils/mock-items';
 
 @Component({
   selector: 'app-add-course',
@@ -19,7 +19,7 @@ export class AddCourseComponent implements OnInit {
   // releaseDate!: Date;
   releaseDate!: string;
   duration!: number;
-  authors = MOCKED_AUTHORS.slice();
+  authors!: AuthorType[];
   courseAuthors: string[] = [];
   @Output() cancelAddition: EventEmitter<void> = new EventEmitter<void>();
 
@@ -38,7 +38,11 @@ export class AddCourseComponent implements OnInit {
           (courseData: CourseType | null) => {
             if (courseData) {
               this.course = courseData;
-              // this.courseAuthors = courseData.authors.map(author => author.name).join(', ');
+              if (courseData.authors) {
+                this.courseAuthors = courseData.authors.map(
+                  author => `${author.name} ${author.lastName}`
+                );
+              }
               this.courseName = courseData.name;
               this.courseDescription = courseData.description;
               this.releaseDate = courseData.date;
@@ -65,7 +69,37 @@ export class AddCourseComponent implements OnInit {
     this.courseName = title;
   }
   setAuthors(authors: string[]) {
-    this.courseAuthors = authors;
+    const convertedAuthors = authors.map(author => {
+      const nameParts = author.split(' ');
+      const lastName = nameParts.length > 1 ? nameParts[1] : '';
+      const firstName = nameParts[0];
+      return { name: firstName, lastName: lastName };
+    });
+
+    const updatedAuthors: AuthorType[] = convertedAuthors.map(
+      convertedAuthor => {
+        const existingAuthor = this.course?.authors?.find(
+          author =>
+            author.name === convertedAuthor.name &&
+            author.lastName === convertedAuthor.lastName
+        );
+
+        if (existingAuthor) {
+          console.log(existingAuthor);
+          return existingAuthor;
+        } else {
+          return {
+            id: Math.floor(1000 + Math.random() * 9000),
+            name: convertedAuthor.name,
+            lastName: convertedAuthor.lastName,
+          };
+        }
+      }
+    );
+
+    console.log('Converted authors array: ');
+    console.log(updatedAuthors);
+    this.authors = updatedAuthors;
   }
 
   onSaving() {
@@ -78,6 +112,7 @@ export class AddCourseComponent implements OnInit {
         length: this.duration,
         // date: this.releaseDate.toLocaleDateString(),
         date: this.releaseDate,
+        authors: this.authors,
       };
       this.coursesService.updateCourse(updatedCourse);
     } else {
@@ -88,7 +123,7 @@ export class AddCourseComponent implements OnInit {
         length: this.duration,
         // date: this.releaseDate.toLocaleDateString(),
         date: this.releaseDate,
-        // authors: this.courseAuthors,
+        authors: this.authors,
       });
     }
     console.log('Saving course...');
